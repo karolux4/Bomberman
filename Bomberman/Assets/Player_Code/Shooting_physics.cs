@@ -23,20 +23,25 @@ public class Shooting_physics : MonoBehaviour {
 	}
     void Shoot()
     {
+        float strengthX = 0, strengthZ = 0;
         Vector3 pos = player_transform.localPosition; // getting player position
         switch(Movement_physics.direction) // finding the way player is watching
          {
              case 1:
-                 pos = new Vector3(pos.x - strength, pos.y, pos.z);
+                 pos = new Vector3(pos.x - 1, pos.y, pos.z);
+                 strengthX = -strength;
                  break;
              case 2:
-                 pos = new Vector3(pos.x + strength, pos.y, pos.z);
+                 pos = new Vector3(pos.x + 1, pos.y, pos.z);
+                 strengthX = strength;
                  break;
              case 3:
-                 pos = new Vector3(pos.x, pos.y, pos.z+strength);
+                 pos = new Vector3(pos.x, pos.y, pos.z+1);
+                 strengthZ = strength;
                  break;
              case 4:
-                 pos = new Vector3(pos.x, pos.y, pos.z-strength);
+                 pos = new Vector3(pos.x, pos.y, pos.z-1);
+                 strengthZ = -strength;
                  break;
          }
         bomb_transform.localPosition = pos; // changing bomb location
@@ -47,6 +52,7 @@ public class Shooting_physics : MonoBehaviour {
         sphereCollider.radius = bomb_collision_radius;
         Rigidbody rb = player_bomb.AddComponent<Rigidbody>();
         rb.freezeRotation = true;
+        rb.AddForce(strengthX,0,strengthZ,ForceMode.Impulse);
         StartCoroutine(Explosion(player_bomb)); // starting explosion
     }
     IEnumerator Explosion(GameObject player_bomb) //creating bomb explosion
