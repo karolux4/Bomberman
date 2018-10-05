@@ -8,7 +8,9 @@ public class Shooting_physics : MonoBehaviour {
     public Transform bomb_transform;
     public Transform player_transform;
     private int count=0;
-    private int limit = 1;
+    public int limit;
+    public float strength;
+    public float bomb_collision_radius;
 	// Update is called once per frame
 	void Update ()
     {
@@ -25,23 +27,24 @@ public class Shooting_physics : MonoBehaviour {
         switch(Movement_physics.direction) // finding the way player is watching
          {
              case 1:
-                 pos = new Vector3(pos.x - 1, pos.y, pos.z);
+                 pos = new Vector3(pos.x - strength, pos.y, pos.z);
                  break;
              case 2:
-                 pos = new Vector3(pos.x + 1, pos.y, pos.z);
+                 pos = new Vector3(pos.x + strength, pos.y, pos.z);
                  break;
              case 3:
-                 pos = new Vector3(pos.x, pos.y, pos.z+1);
+                 pos = new Vector3(pos.x, pos.y, pos.z+strength);
                  break;
              case 4:
-                 pos = new Vector3(pos.x, pos.y, pos.z-1);
+                 pos = new Vector3(pos.x, pos.y, pos.z-strength);
                  break;
          }
         bomb_transform.localPosition = pos; // changing bomb location
         GameObject player_bomb= Instantiate(bomb); // creating bomb in the scene
         player_bomb.name = player_transform.name + "_bomb_"+count; // renaming bomb
+        player_bomb.layer = 11;
         SphereCollider sphereCollider = player_bomb.AddComponent<SphereCollider>() as SphereCollider; // adding colliders and rigidbody
-        sphereCollider.radius = 0.2f;
+        sphereCollider.radius = bomb_collision_radius;
         Rigidbody rb = player_bomb.AddComponent<Rigidbody>();
         rb.freezeRotation = true;
         StartCoroutine(Explosion(player_bomb)); // starting explosion

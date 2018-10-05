@@ -1706,7 +1706,7 @@ GameObject:
   - component: {fileID: 289835049}
   - component: {fileID: 289835048}
   - component: {fileID: 289835047}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1738,7 +1738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 3, z: -7}
+  m_FollowOffset: {x: 0, y: 3.67, z: -4.7}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3710,8 +3710,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.20106587, y: 0.000000016109283, z: -0.00000007848322, w: 0.9795777}
-  m_LocalPosition: {x: 6.5, y: 4.5, z: -10.5}
+  m_LocalRotation: {x: 0.3254406, y: 0.000000014137057, z: -0.000000082746695, w: 0.94556254}
+  m_LocalPosition: {x: 6.5, y: 5.17, z: -8.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8500,7 +8500,7 @@ GameObject:
   - component: {fileID: 1260011828}
   - component: {fileID: 1260011834}
   - component: {fileID: 1260011833}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8604,6 +8604,9 @@ MonoBehaviour:
   bomb: {fileID: 100000, guid: a88b061e16769304d9e387ca90ab0acc, type: 3}
   bomb_transform: {fileID: 400000, guid: a88b061e16769304d9e387ca90ab0acc, type: 3}
   player_transform: {fileID: 1260011832}
+  limit: 1
+  strength: 1
+  bomb_collision_radius: 0.4
 --- !u!114 &1260011834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9242,7 +9245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1371950186}
   - component: {fileID: 1371950185}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9291,8 +9294,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1371950184}
-  m_LocalRotation: {x: 0.20106587, y: 0.000000016109283, z: -0.00000007848322, w: 0.9795777}
-  m_LocalPosition: {x: 0, y: 3, z: -7}
+  m_LocalRotation: {x: 0.3254406, y: 0.000000014137057, z: -0.000000082746695, w: 0.94556254}
+  m_LocalPosition: {x: 0, y: 3.67, z: -4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 289835046}
