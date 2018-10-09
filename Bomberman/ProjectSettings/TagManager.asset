@@ -17,9 +17,9 @@ TagManager:
   - 
   - PostProcessing
   - Map
-  - 
-  - 
-  - 
+  - Player
+  - Bombs
+  - False_bomb
   - 
   - 
   - 
