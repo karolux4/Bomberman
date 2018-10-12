@@ -26,37 +26,49 @@ public class Bomb_explosion : MonoBehaviour {
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out Front,Mathf.Infinity))
         {
             float distance1 = Front.distance;
-            if ((distance1 < explosion_distance)&&(Front.collider.tag == "Boxes"))
+            if (Front.collider.gameObject.layer != 11)
             {
-                Debug.Log("Hit front");
-                Destroy(Front.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                if ((distance1 < explosion_distance) && (Front.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                {
+                    Debug.Log("Hit front");
+                    Destroy(Front.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                }
             }
         }
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out Back))
         {
             float distance1 = Back.distance;
-            if ((distance1 < explosion_distance) && (Back.collider.tag == "Boxes"))
+            if (Back.collider.gameObject.layer != 11)
             {
-                Debug.Log("Hit back");
-                Destroy(Back.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                if ((distance1 < explosion_distance) && (Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                {
+                    Debug.Log("Hit back");
+                    Destroy(Back.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                }
             }
         }
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out Left))
         {
             float distance1 = Left.distance;
-            if ((distance1 < explosion_distance) && (Left.collider.tag == "Boxes"))
+            if (Left.collider.gameObject.layer != 11)
             {
-                Debug.Log("Hit left");
-                Destroy(Left.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                if ((distance1 < explosion_distance) && (Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                {
+                    Debug.Log("Hit left");
+                    Destroy(Left.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                }
             }
         }
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Right))
         {
             float distance1 = Right.distance;
-            if ((distance1 < explosion_distance) && (Right.collider.tag == "Boxes"))
+            if (Right.collider.gameObject.layer != 11)
             {
-                Debug.Log("Hit right");
-                Destroy(Right.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                if ((distance1 < explosion_distance) && (Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                {
+                    Debug.Log("Hit right");
+                    Destroy(Right.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                }
             }
         }
 
