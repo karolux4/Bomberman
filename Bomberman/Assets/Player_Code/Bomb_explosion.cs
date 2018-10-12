@@ -5,6 +5,9 @@ using UnityEngine;
 public class Bomb_explosion : MonoBehaviour {
     public GameObject creator { get; set; }
     public float explosion_distance { get; set; }
+    public GameObject explosion_vertical { get; set; }
+    public GameObject explosion_horizontal { get; set; }
+    public float power { get; set; }
     // Use this for initialization
     void Start () {
         StartCoroutine(Explosion());
@@ -21,6 +24,14 @@ public class Bomb_explosion : MonoBehaviour {
     }
     void Explode()
     {
+        explosion_vertical.GetComponent<Transform>().localPosition = new Vector3(gameObject.GetComponent<Transform>().localPosition.x, 1.5f, gameObject.GetComponent<Transform>().localPosition.z);
+        explosion_horizontal.GetComponent<Transform>().localPosition = new Vector3(gameObject.GetComponent<Transform>().localPosition.x, 1.5f, gameObject.GetComponent<Transform>().localPosition.z);
+        explosion_vertical.GetComponent<ParticleSystem>().startLifetime = power*0.2f;
+        explosion_horizontal.GetComponent<ParticleSystem>().startLifetime = power * 0.2f;
+        // vertical explosion
+        Instantiate(explosion_vertical);
+        // horizontal explosion
+        Instantiate(explosion_horizontal);
         explosion_distance = 1;
         RaycastHit Front, Back, Left, Right;
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out Front,Mathf.Infinity))

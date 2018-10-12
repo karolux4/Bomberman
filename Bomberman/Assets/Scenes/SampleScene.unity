@@ -7166,7 +7166,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13630
+  m_Name: pb_Mesh28304
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -10308,6 +10308,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bomb: {fileID: 100000, guid: a88b061e16769304d9e387ca90ab0acc, type: 3}
   player: {fileID: 1260011827}
+  explosion_vertical: {fileID: 1130118206815216, guid: d27ae8254d6419543a573e780bcb136f,
+    type: 2}
+  explosion_horizontal: {fileID: 1533671589835838, guid: cc3dfe41ae0f6ba4583e1985619c7e58,
+    type: 2}
+  bomb_power: 1
   limit: 2
   strength: 10
   bomb_collision_radius: 0.4
