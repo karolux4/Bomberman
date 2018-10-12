@@ -539,7 +539,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -777,7 +777,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -835,7 +835,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -1122,7 +1122,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -1202,7 +1202,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -1333,7 +1333,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -1896,7 +1896,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -2285,7 +2285,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -4068,7 +4068,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -4344,7 +4344,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -4463,7 +4463,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.3254406, y: 0.000000046676316, z: -0.00000009394556, w: 0.94556254}
+  m_LocalRotation: {x: 0.32544056, y: 0.000000014136894, z: -0.00000008274625, w: 0.94556254}
   m_LocalPosition: {x: 6.5, y: 5.17, z: -8.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4565,7 +4565,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -4841,7 +4841,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -4899,7 +4899,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -5045,7 +5045,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -5439,7 +5439,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -5571,7 +5571,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -5714,7 +5714,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -6890,7 +6890,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -7166,7 +7166,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13652
+  m_Name: pb_Mesh28304
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -7588,7 +7588,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -7879,7 +7879,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -8022,7 +8022,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -8635,7 +8635,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -8693,7 +8693,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -8751,7 +8751,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -9192,7 +9192,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -9250,7 +9250,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -9618,7 +9618,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -9986,7 +9986,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -10044,7 +10044,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -10308,6 +10308,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bomb: {fileID: 100000, guid: a88b061e16769304d9e387ca90ab0acc, type: 3}
   player: {fileID: 1260011827}
+  explosion_vertical: {fileID: 1130118206815216, guid: d27ae8254d6419543a573e780bcb136f,
+    type: 2}
+  explosion_horizontal: {fileID: 1533671589835838, guid: cc3dfe41ae0f6ba4583e1985619c7e58,
+    type: 2}
+  bomb_power: 1
   limit: 2
   strength: 10
   bomb_collision_radius: 0.4
@@ -10382,7 +10387,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -10455,7 +10460,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -10588,7 +10593,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -11200,7 +11205,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1371950184}
-  m_LocalRotation: {x: 0.3254406, y: 0.000000046676316, z: -0.00000009394556, w: 0.94556254}
+  m_LocalRotation: {x: 0.32544056, y: 0.000000014136894, z: -0.00000008274625, w: 0.94556254}
   m_LocalPosition: {x: 0, y: 3.67, z: -4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11257,7 +11262,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -12658,7 +12663,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -12893,7 +12898,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -13138,7 +13143,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -14741,7 +14746,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -15034,7 +15039,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -15155,7 +15160,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -15535,7 +15540,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -15722,7 +15727,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -15802,7 +15807,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -15860,7 +15865,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -16534,7 +16539,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -17585,7 +17590,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 22d0a580787e24344ac790b817ebec2f, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Walls
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
