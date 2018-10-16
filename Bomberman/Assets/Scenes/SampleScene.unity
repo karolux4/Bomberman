@@ -4463,7 +4463,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.32544056, y: 0.000000014136894, z: -0.00000008274625, w: 0.94556254}
+  m_LocalRotation: {x: 0.3254406, y: 0.000000046676316, z: -0.00000009394556, w: 0.94556254}
   m_LocalPosition: {x: 6.5, y: 5.17, z: -8.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4957,6 +4957,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &596913817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 596913815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b75074b0c53ee4f979cbecfc7bc62f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &602133052 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d,
@@ -10207,7 +10218,7 @@ GameObject:
   - component: {fileID: 1260011833}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11205,7 +11216,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1371950184}
-  m_LocalRotation: {x: 0.32544056, y: 0.000000014136894, z: -0.00000008274625, w: 0.94556254}
+  m_LocalRotation: {x: 0.3254406, y: 0.000000046676316, z: -0.00000009394556, w: 0.94556254}
   m_LocalPosition: {x: 0, y: 3.67, z: -4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17077,7 +17088,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 91401f9a1a276b2409dc404479e8dfeb, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Power_up1
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -17085,6 +17096,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

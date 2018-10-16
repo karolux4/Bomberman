@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bomb_explosion : MonoBehaviour {
     public GameObject creator { get; set; }
-    public float explosion_distance { get; set; }
     public GameObject explosion_vertical { get; set; }
     public GameObject explosion_horizontal { get; set; }
     public float power { get; set; }
@@ -26,20 +25,19 @@ public class Bomb_explosion : MonoBehaviour {
     {
         explosion_vertical.GetComponent<Transform>().localPosition = new Vector3(gameObject.GetComponent<Transform>().localPosition.x, 1.5f, gameObject.GetComponent<Transform>().localPosition.z);
         explosion_horizontal.GetComponent<Transform>().localPosition = new Vector3(gameObject.GetComponent<Transform>().localPosition.x, 1.5f, gameObject.GetComponent<Transform>().localPosition.z);
-        explosion_vertical.GetComponent<ParticleSystem>().startLifetime = power*0.2f;
-        explosion_horizontal.GetComponent<ParticleSystem>().startLifetime = power * 0.2f;
+        explosion_vertical.GetComponent<ParticleSystem>().startSpeed = power*5f;
+        explosion_horizontal.GetComponent<ParticleSystem>().startSpeed = power * 5f;
         // vertical explosion
         Instantiate(explosion_vertical);
         // horizontal explosion
         Instantiate(explosion_horizontal);
-        explosion_distance = 1;
         RaycastHit Front, Back, Left, Right;
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out Front,Mathf.Infinity))
         {
             float distance1 = Front.distance;
             if (Front.collider.gameObject.layer != 11)
             {
-                if ((distance1 < explosion_distance) && (Front.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                if ((distance1 < power) && (Front.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
                 {
                     Debug.Log("Hit front");
                     Destroy(Front.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
@@ -51,7 +49,7 @@ public class Bomb_explosion : MonoBehaviour {
             float distance1 = Back.distance;
             if (Back.collider.gameObject.layer != 11)
             {
-                if ((distance1 < explosion_distance) && (Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                if ((distance1 < power) && (Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
                 {
                     Debug.Log("Hit back");
                     Destroy(Back.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
@@ -63,7 +61,7 @@ public class Bomb_explosion : MonoBehaviour {
             float distance1 = Left.distance;
             if (Left.collider.gameObject.layer != 11)
             {
-                if ((distance1 < explosion_distance) && (Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                if ((distance1 < power) && (Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
                 {
                     Debug.Log("Hit left");
                     Destroy(Left.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
@@ -75,7 +73,7 @@ public class Bomb_explosion : MonoBehaviour {
             float distance1 = Right.distance;
             if (Right.collider.gameObject.layer != 11)
             {
-                if ((distance1 < explosion_distance) && (Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                if ((distance1 < power) && (Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
                 {
                     Debug.Log("Hit right");
                     Destroy(Right.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
