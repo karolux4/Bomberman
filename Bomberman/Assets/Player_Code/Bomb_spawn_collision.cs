@@ -15,7 +15,14 @@ public class Bomb_spawn_collision : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
-        collided = true;
+        if (other.tag == "Map Objects")
+        {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            collided = true;
+        }
     }
     private IEnumerator CheckForCollision()
     {
@@ -29,7 +36,10 @@ public class Bomb_spawn_collision : MonoBehaviour {
             Debug.Log(creator.GetComponent<Transform>().localPosition);
             Destroy(this.gameObject);
             creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
-            creator.GetComponent<Shooting_physics>().count--;
+            if (creator.GetComponent<Shooting_physics>().count > 0)
+            {
+                creator.GetComponent<Shooting_physics>().count--;
+            }
         }
         else
         {

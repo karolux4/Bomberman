@@ -23,8 +23,26 @@ public class Bomb_explosion : MonoBehaviour {
     }
     void Explode()
     {
-        explosion_vertical.GetComponent<Transform>().localPosition = new Vector3(gameObject.GetComponent<Transform>().localPosition.x, 1.5f, gameObject.GetComponent<Transform>().localPosition.z);
-        explosion_horizontal.GetComponent<Transform>().localPosition = new Vector3(gameObject.GetComponent<Transform>().localPosition.x, 1.5f, gameObject.GetComponent<Transform>().localPosition.z);
+        Vector3 pos = gameObject.GetComponent<Transform>().localPosition;
+        float posX, posZ;
+        if(pos.x>=0)
+        {
+            posX = (int)pos.x + 0.5f;
+        }
+        else
+        {
+            posX= Mathf.Sign(pos.x) * (Mathf.Abs((int)pos.x) + 0.5f);
+        }
+        if (pos.z >= 0)
+        {
+            posZ = (int)pos.z + 0.5f;
+        }
+        else
+        {
+            posZ = Mathf.Sign(pos.z) * (Mathf.Abs((int)pos.z) + 0.5f);
+        }
+        explosion_vertical.GetComponent<Transform>().localPosition = new Vector3(posX, 1.5f, posZ);
+        explosion_horizontal.GetComponent<Transform>().localPosition = new Vector3(posX, 1.5f, posZ);
         explosion_vertical.GetComponent<ParticleSystem>().startSpeed = power*5f;
         explosion_horizontal.GetComponent<ParticleSystem>().startSpeed = power * 5f;
         // vertical explosion

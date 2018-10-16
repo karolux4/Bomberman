@@ -9,7 +9,14 @@ public class Power_up1 : MonoBehaviour {
         if(other.tag=="Player")
         {
             GameObject Player = other.gameObject;
-            Player.GetComponent<Shooting_physics>().bomb_power++;
+            if (gameObject.tag == "Strength_power_up")
+            {
+                Player.GetComponent<Shooting_physics>().bomb_power++;
+            }
+            else if(gameObject.tag == "Limit_power_up")
+            {
+                Player.GetComponent<Shooting_physics>().limit++;
+            }
             Destroy(this.gameObject);
         }
     }

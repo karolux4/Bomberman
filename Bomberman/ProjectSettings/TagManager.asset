@@ -7,7 +7,8 @@ TagManager:
   - Map Objects
   - Boxes
   - Walls
-  - Power_up1
+  - Strength_power_up
+  - Limit_power_up
   layers:
   - Default
   - TransparentFX
