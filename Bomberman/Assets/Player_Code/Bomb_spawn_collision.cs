@@ -18,26 +18,26 @@ public class Bomb_spawn_collision : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (((other.tag == "Map Objects")||(other.tag=="Boxes"))&&(bounce_count<bounce_limit))
+        if ((other.tag == "Map Objects")&&(bounce_count<bounce_limit))
         {
             bounce_count++;
         }
-        else if ((other.tag == "Map Objects") || (other.tag == "Boxes"))
+        else if (other.tag == "Map Objects")
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }
-        else
+        else if((other.tag=="Boxes")||(other.tag=="Walls"))
         {
             collided = true;
         }
     }
     private void OnTriggerStay(Collider other)
     {
-        if (((other.tag == "Map Objects") || (other.tag == "Boxes")) && (bounce_count < bounce_limit))
+        if ((other.tag == "Map Objects") && (bounce_count < bounce_limit))
         {
             bounce_count++;
         }
-        else if ((other.tag == "Map Objects") || (other.tag == "Boxes"))
+        else if (other.tag == "Map Objects")
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }

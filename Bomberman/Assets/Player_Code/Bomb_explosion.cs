@@ -6,23 +6,27 @@ public class Bomb_explosion : MonoBehaviour {
     public GameObject creator { get; set; }
     public GameObject explosion_vertical { get; set; }
     public GameObject explosion_horizontal { get; set; }
+    public bool exploding { get; set; }
     public float power { get; set; }
+    public Coroutine Explosive;
     // Use this for initialization
     void Start () {
-        StartCoroutine(Explosion());
+        exploding = false;
+        Explosive = StartCoroutine(Explosion());
 	}
-    private IEnumerator Explosion()
+    IEnumerator Explosion()
     {
         this.gameObject.layer = 11;
         yield return new WaitForSeconds(1);
         creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
         yield return new WaitForSeconds(2);
-        Explode();
+        Explode("No");
         creator.GetComponent<Shooting_physics>().count--;
         Destroy(this.gameObject);
     }
-    void Explode()
+    public void Explode(string message)
     {
+        exploding = true;
         Vector3 pos = gameObject.GetComponent<Transform>().localPosition;
         float posX, posZ;
         if(pos.x>=0)
@@ -49,54 +53,105 @@ public class Bomb_explosion : MonoBehaviour {
         Instantiate(explosion_vertical);
         // horizontal explosion
         Instantiate(explosion_horizontal);
+        int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs");
         RaycastHit Front, Back, Left, Right;
-        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out Front,Mathf.Infinity))
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out Front,layer_mask))
         {
             float distance1 = Front.distance;
             if (Front.collider.gameObject.layer != 11)
             {
-                if ((distance1 < power) && (Front.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                if (Front.collider.GetComponentInParent<BoxCollider>() != null)
                 {
-                    Debug.Log("Hit front");
-                    Destroy(Front.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                    if ((distance1 < power) && (Front.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                    {
+                        Debug.Log("Hit front");
+                        Destroy(Front.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                    }
+                }
+            }
+            else
+            {
+                if ((distance1 < power)&&(!Front.collider.gameObject.GetComponent<Bomb_explosion>().exploding))
+                {
+                    Front.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(Front.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
+                    Front.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
                 }
             }
         }
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out Back))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out Back, layer_mask))
         {
             float distance1 = Back.distance;
             if (Back.collider.gameObject.layer != 11)
             {
-                if ((distance1 < power) && (Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                if (Back.collider.GetComponentInParent<BoxCollider>() != null)
                 {
-                    Debug.Log("Hit back");
-                    Destroy(Back.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                    if ((distance1 < power) && (Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                    {
+                        Debug.Log("Hit back");
+                        Destroy(Back.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                    }
+                }
+            }
+            else
+            {
+                if ((distance1 < power)&&(!Back.collider.gameObject.GetComponent<Bomb_explosion>().exploding))
+                {
+                    Back.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(Back.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
+                    Back.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
                 }
             }
         }
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out Left))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out Left, layer_mask))
         {
             float distance1 = Left.distance;
             if (Left.collider.gameObject.layer != 11)
             {
-                if ((distance1 < power) && (Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                if (Left.collider.GetComponentInParent<BoxCollider>() != null)
                 {
-                    Debug.Log("Hit left");
-                    Destroy(Left.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                    if ((distance1 < power) && (Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                    {
+                        Debug.Log("Hit left");
+                        Destroy(Left.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                    }
+                }
+            }
+            else
+            {
+                if ((distance1 < power)&&(!Left.collider.gameObject.GetComponent<Bomb_explosion>().exploding))
+                {
+                    Left.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(Left.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
+                    Left.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
                 }
             }
         }
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Right))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Right, layer_mask))
         {
             float distance1 = Right.distance;
             if (Right.collider.gameObject.layer != 11)
             {
-                if ((distance1 < power) && (Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                if (Right.collider.GetComponentInParent<BoxCollider>() != null)
                 {
-                    Debug.Log("Hit right");
-                    Destroy(Right.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                    if ((distance1 < power) && (Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
+                    {
+                        Debug.Log("Hit right");
+                        Destroy(Right.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
+                    }
                 }
             }
+            else
+            {
+                if ((distance1 < power)&&(!Right.collider.gameObject.GetComponent<Bomb_explosion>().exploding))
+                {
+                    Right.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(Right.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
+                    Right.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
+                }
+            }
+        }
+        if (message == "Yes")
+        {
+            creator.GetComponent<Shooting_physics>().count--;
+            creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
+            Destroy(gameObject);
         }
 
     }
