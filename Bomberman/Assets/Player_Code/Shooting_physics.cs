@@ -8,12 +8,14 @@ public class Shooting_physics : MonoBehaviour {
     public GameObject player;
     public GameObject explosion_vertical;
     public GameObject explosion_horizontal;
+    public PhysicMaterial bounce;
     public float bomb_power;
     public int count { get; set; }
     public bool allowed_to_throw { get; set; }
     public int limit;
     public float strength;
     public float bomb_collision_radius;
+    public int bounce_limit;
     private void Start()
     {
         count = 0;
@@ -59,6 +61,7 @@ public class Shooting_physics : MonoBehaviour {
         player_bomb.layer = 12;
         SphereCollider sphereCollider = player_bomb.AddComponent<SphereCollider>() as SphereCollider; // adding colliders and rigidbody
         sphereCollider.radius = bomb_collision_radius;
+        sphereCollider.material = bounce;
         Rigidbody rb = player_bomb.AddComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.AddForce(strengthX,0,strengthZ,ForceMode.Impulse);
@@ -69,5 +72,6 @@ public class Shooting_physics : MonoBehaviour {
         player_bomb.GetComponent<Bomb_spawn_collision>().explosion_vertical = explosion_vertical;
         player_bomb.GetComponent<Bomb_spawn_collision>().explosion_horizontal = explosion_horizontal;
         player_bomb.GetComponent<Bomb_spawn_collision>().power = bomb_power;
+        player_bomb.GetComponent<Bomb_spawn_collision>().bounce_limit = bounce_limit;
     }
 }

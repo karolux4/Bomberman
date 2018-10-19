@@ -17,6 +17,10 @@ public class Power_up1 : MonoBehaviour {
             {
                 Player.GetComponent<Shooting_physics>().limit++;
             }
+            else if(gameObject.tag == "Bounce_power_up")
+            {
+                Player.GetComponent<Shooting_physics>().bounce_limit+=10;
+            }
             Destroy(this.gameObject);
         }
     }

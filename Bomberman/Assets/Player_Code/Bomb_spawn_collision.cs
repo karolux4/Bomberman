@@ -8,20 +8,38 @@ public class Bomb_spawn_collision : MonoBehaviour {
     public GameObject explosion_horizontal { get; set; }
     public float power { get; set; }
     public bool collided { get; set; }
+    public int bounce_limit { get; set; }
+    private int bounce_count;
     private void Start()
     {
+        bounce_count = 0;
         collided = false;
         StartCoroutine(CheckForCollision());
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Map Objects")
+        if (((other.tag == "Map Objects")||(other.tag=="Boxes"))&&(bounce_count<bounce_limit))
+        {
+            bounce_count++;
+        }
+        else if ((other.tag == "Map Objects") || (other.tag == "Boxes"))
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }
         else
         {
             collided = true;
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (((other.tag == "Map Objects") || (other.tag == "Boxes")) && (bounce_count < bounce_limit))
+        {
+            bounce_count++;
+        }
+        else if ((other.tag == "Map Objects") || (other.tag == "Boxes"))
+        {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }
     }
     private IEnumerator CheckForCollision()
