@@ -4454,6 +4454,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &460605730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 460605728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b75074b0c53ee4f979cbecfc7bc62f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &460963211 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d,
@@ -11509,6 +11520,7 @@ GameObject:
   - component: {fileID: 1260011828}
   - component: {fileID: 1260011834}
   - component: {fileID: 1260011833}
+  - component: {fileID: 1260011835}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -11634,6 +11646,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 1260011828}
+  speed: 2
+--- !u!114 &1260011835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1260011827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd51a7eb2f6446418db6074ef55bbe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifes_count: 3
 --- !u!4 &1265894406 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d,
@@ -11840,7 +11865,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: eeac3dce4d5b9eb40ba71a16453187ef, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Boxes
+      value: Extra_life_power_up
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
@@ -11848,11 +11873,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}

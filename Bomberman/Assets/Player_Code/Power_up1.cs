@@ -21,6 +21,14 @@ public class Power_up1 : MonoBehaviour {
             {
                 Player.GetComponent<Shooting_physics>().bounce_limit+=10;
             }
+            else if(gameObject.tag == "Speed_power_up")
+            {
+                Player.GetComponent<Movement_physics>().speed += 1;
+            }
+            else if(gameObject.tag=="Extra_life_power_up")
+            {
+                Player.GetComponent<Health>().lifes_count++;
+            }
             Destroy(this.gameObject);
         }
     }
