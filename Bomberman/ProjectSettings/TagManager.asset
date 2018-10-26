@@ -12,6 +12,7 @@ TagManager:
   - Bounce_power_up
   - Speed_power_up
   - Extra_life_power_up
+  - Bomb_kick_power_up
   layers:
   - Default
   - TransparentFX

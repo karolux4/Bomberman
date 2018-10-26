@@ -7,7 +7,6 @@ public class Bomb_explosion : MonoBehaviour {
     public GameObject explosion_vertical { get; set; }
     public GameObject explosion_horizontal { get; set; }
     public bool exploding { get; set; }
-    public float power { get; set; }
     public Coroutine Explosive;
     // Use this for initialization
     void Start () {
@@ -47,13 +46,13 @@ public class Bomb_explosion : MonoBehaviour {
         }
         explosion_vertical.GetComponent<Transform>().localPosition = new Vector3(posX, 1.5f, posZ);
         explosion_horizontal.GetComponent<Transform>().localPosition = new Vector3(posX, 1.5f, posZ);
-        explosion_vertical.GetComponent<ParticleSystem>().startSpeed = power*5f;
-        explosion_horizontal.GetComponent<ParticleSystem>().startSpeed = power * 5f;
+        explosion_vertical.GetComponent<ParticleSystem>().startSpeed = creator.GetComponent<Additional_power_ups>().bomb_power* 5f;
+        explosion_horizontal.GetComponent<ParticleSystem>().startSpeed = creator.GetComponent<Additional_power_ups>().bomb_power * 5f;
         // vertical explosion
         Instantiate(explosion_vertical);
         // horizontal explosion
         Instantiate(explosion_horizontal);
-        ExplosionRays(this.gameObject,power,true,true,true,true);
+        ExplosionRays(this.gameObject, creator.GetComponent<Additional_power_ups>().bomb_power, true,true,true,true);
         if (message == "Yes")
         {
             creator.GetComponent<Shooting_physics>().count--;
@@ -84,7 +83,7 @@ public class Bomb_explosion : MonoBehaviour {
                     if ((distance1 < exploding_power) && (Front.collider.tag == "Player"))
                     {
                         Debug.Log("Hit player");
-                        Front.collider.gameObject.GetComponent<Health>().lifes_count--;
+                        Front.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
                         ExplosionRays(Front.collider.gameObject, exploding_power - distance1, true, false, false, false);
                     }
                 }
@@ -116,7 +115,7 @@ public class Bomb_explosion : MonoBehaviour {
                     if ((distance1 < exploding_power) && (Back.collider.tag == "Player"))
                     {
                         Debug.Log("Hit player");
-                        Back.collider.gameObject.GetComponent<Health>().lifes_count--;
+                        Back.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
                         ExplosionRays(Back.collider.gameObject, exploding_power - distance1, false, true, false, false);
                     }
                 }
@@ -149,7 +148,7 @@ public class Bomb_explosion : MonoBehaviour {
                     if ((distance1 < exploding_power) && (Left.collider.tag == "Player"))
                     {
                         Debug.Log("Hit player");
-                        Left.collider.gameObject.GetComponent<Health>().lifes_count--;
+                        Left.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
                         ExplosionRays(Left.collider.gameObject, exploding_power - distance1, false, false, true, false);
                     }
                 }
@@ -182,7 +181,7 @@ public class Bomb_explosion : MonoBehaviour {
                     if ((distance1 < exploding_power) && (Right.collider.tag == "Player"))
                     {
                         Debug.Log("Hit player");
-                        Right.collider.gameObject.GetComponent<Health>().lifes_count--;
+                        Right.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
                         ExplosionRays(Right.collider.gameObject, exploding_power - distance1, false, false, false, true);
                     }
                 }

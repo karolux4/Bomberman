@@ -11629,11 +11629,8 @@ MonoBehaviour:
   explosion_horizontal: {fileID: 1533671589835838, guid: cc3dfe41ae0f6ba4583e1985619c7e58,
     type: 2}
   bounce: {fileID: 13400000, guid: 6be1666332106da41abcb798109b28ae, type: 2}
-  bomb_power: 2
-  limit: 2
   strength: 10
   bomb_collision_radius: 0.4
-  bounce_limit: 2
 --- !u!114 &1260011834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11646,7 +11643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 1260011828}
-  speed: 2
+  direction: 3
 --- !u!114 &1260011835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11658,7 +11655,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd51a7eb2f6446418db6074ef55bbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bomb_power: 1
+  limit: 2
+  bounce_limit: 0
+  speed: 2
   lifes_count: 3
+  bomb_kick: 0
 --- !u!4 &1265894406 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d,
@@ -11865,7 +11867,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: eeac3dce4d5b9eb40ba71a16453187ef, type: 2}
     - target: {fileID: 100000, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString
-      value: Extra_life_power_up
+      value: Bomb_kick_power_up
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 224f2f5faed49bf4fa9e1506ed3b8d6d, type: 3}
       propertyPath: m_TagString

@@ -9,13 +9,10 @@ public class Shooting_physics : MonoBehaviour {
     public GameObject explosion_vertical;
     public GameObject explosion_horizontal;
     public PhysicMaterial bounce;
-    public float bomb_power;
     public int count { get; set; }
     public bool allowed_to_throw { get; set; }
-    public int limit;
     public float strength;
     public float bomb_collision_radius;
-    public int bounce_limit;
     private void Start()
     {
         count = 0;
@@ -25,7 +22,7 @@ public class Shooting_physics : MonoBehaviour {
     void Update ()
     {
         bool pressed = Input.GetKey(KeyCode.Space); //checking if player wants to shoot
-        if (pressed && count < limit && allowed_to_throw)
+        if (pressed && count < gameObject.GetComponent<Additional_power_ups>().limit && allowed_to_throw)
         {
             allowed_to_throw = false;
             count++; // counting amount of player bombs that has not exploded
@@ -36,7 +33,8 @@ public class Shooting_physics : MonoBehaviour {
     {
         float strengthX = 0, strengthZ = 0;
         Vector3 pos = player.GetComponent<Transform>().localPosition; // getting player position
-        switch(Movement_physics.direction) // finding the way player is watching
+        int direction = this.gameObject.GetComponent<Movement_physics>().direction;
+        switch(direction) // finding the way player is watching
          {
              case 1:
                  pos = new Vector3(pos.x - 0.7f, pos.y, pos.z);
@@ -71,7 +69,5 @@ public class Shooting_physics : MonoBehaviour {
         player_bomb.GetComponent<Bomb_spawn_collision>().creator = player;
         player_bomb.GetComponent<Bomb_spawn_collision>().explosion_vertical = explosion_vertical;
         player_bomb.GetComponent<Bomb_spawn_collision>().explosion_horizontal = explosion_horizontal;
-        player_bomb.GetComponent<Bomb_spawn_collision>().power = bomb_power;
-        player_bomb.GetComponent<Bomb_spawn_collision>().bounce_limit = bounce_limit;
     }
 }
