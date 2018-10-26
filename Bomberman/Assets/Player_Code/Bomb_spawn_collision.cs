@@ -6,16 +6,65 @@ public class Bomb_spawn_collision : MonoBehaviour {
     public GameObject creator { get; set; }
     public GameObject explosion_vertical { get; set; }
     public GameObject explosion_horizontal { get; set; }
-    public float power { get; set; }
     public bool collided { get; set; }
+    private int bounce_count;
+    private bool kicked = false;
     private void Start()
     {
+        bounce_count = 0;
         collided = false;
         StartCoroutine(CheckForCollision());
     }
     private void OnTriggerEnter(Collider other)
     {
-        collided = true;
+        if ((other.tag == "Map Objects")&&(bounce_count<creator.GetComponent<Additional_power_ups>().bounce_limit))
+        {
+            bounce_count++;
+        }
+        else if (other.tag == "Map Objects")
+        {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        }
+        else if((other.tag=="Boxes")||(other.tag=="Walls"))
+        {
+            collided = true;
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if ((other.tag == "Map Objects") && (bounce_count < creator.GetComponent<Additional_power_ups>().bounce_limit))
+        {
+            bounce_count++;
+        }
+        else if ((other.tag == "Map Objects")&&(!kicked))
+        {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+          if((collision.gameObject.tag=="Player")&&(creator.GetComponent<Additional_power_ups>().bomb_kick))
+          {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            int direction = creator.GetComponent<Movement_physics>().direction; // finding the way player is watching
+            switch(direction)
+            {
+                case 1:
+                    gameObject.GetComponent<Rigidbody>().AddForce(-10, 0, 0, ForceMode.Impulse);
+                    break;
+                case 2:
+                    gameObject.GetComponent<Rigidbody>().AddForce(10, 0, 0, ForceMode.Impulse);
+                    break;
+                case 3:
+                    gameObject.GetComponent<Rigidbody>().AddForce(0, 0, 10, ForceMode.Impulse);
+                    break;
+                case 4:
+                    gameObject.GetComponent<Rigidbody>().AddForce(0, 0, -10, ForceMode.Impulse);
+                    break;
+            }
+            gameObject.GetComponent<SphereCollider>().material = null;
+            kicked = true;
+          }
     }
     private IEnumerator CheckForCollision()
     {
@@ -29,7 +78,10 @@ public class Bomb_spawn_collision : MonoBehaviour {
             Debug.Log(creator.GetComponent<Transform>().localPosition);
             Destroy(this.gameObject);
             creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
-            creator.GetComponent<Shooting_physics>().count--;
+            if (creator.GetComponent<Shooting_physics>().count > 0)
+            {
+                creator.GetComponent<Shooting_physics>().count--;
+            }
         }
         else
         {
@@ -39,7 +91,6 @@ public class Bomb_spawn_collision : MonoBehaviour {
             this.gameObject.GetComponent<Bomb_explosion>().creator = creator;
             this.gameObject.GetComponent<Bomb_explosion>().explosion_vertical = explosion_vertical;
             this.gameObject.GetComponent<Bomb_explosion>().explosion_horizontal = explosion_horizontal;
-            this.gameObject.GetComponent<Bomb_explosion>().power = power;
         }
     }
 }

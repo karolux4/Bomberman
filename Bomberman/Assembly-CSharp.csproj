@@ -61,9 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Player_Code\Additional_power_ups.cs" />
     <Compile Include="Assets\Player_Code\Bomb_explosion.cs" />
+    <Compile Include="Assets\Player_Code\Bomb_height_bug_fix.cs" />
     <Compile Include="Assets\Player_Code\Bomb_spawn_collision.cs" />
     <Compile Include="Assets\Player_Code\Movement_physics.cs" />
+    <Compile Include="Assets\Player_Code\Power_up1.cs" />
     <Compile Include="Assets\Player_Code\Shooting_physics.cs" />
     <Reference Include="Cinemachine">
       <HintPath>D:/Projektai/GitHub/Bomberman/Bomberman/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
