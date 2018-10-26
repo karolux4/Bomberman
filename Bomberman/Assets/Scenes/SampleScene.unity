@@ -5120,7 +5120,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.3254406, y: 0.000000046676316, z: -0.00000009394556, w: 0.94556254}
+  m_LocalRotation: {x: 0.32544056, y: 0.000000046676185, z: -0.000000093945175, w: 0.94556254}
   m_LocalPosition: {x: 6.5, y: 5.17, z: -8.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -11629,7 +11629,7 @@ MonoBehaviour:
   explosion_horizontal: {fileID: 1533671589835838, guid: cc3dfe41ae0f6ba4583e1985619c7e58,
     type: 2}
   bounce: {fileID: 13400000, guid: 6be1666332106da41abcb798109b28ae, type: 2}
-  bomb_power: 1
+  bomb_power: 2
   limit: 2
   strength: 10
   bomb_collision_radius: 0.4
@@ -12604,7 +12604,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1371950184}
-  m_LocalRotation: {x: 0.3254406, y: 0.000000046676316, z: -0.00000009394556, w: 0.94556254}
+  m_LocalRotation: {x: 0.32544056, y: 0.000000046676185, z: -0.000000093945175, w: 0.94556254}
   m_LocalPosition: {x: 0, y: 3.67, z: -4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16295,7 +16295,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh14678
+  m_Name: pb_Mesh14686
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
