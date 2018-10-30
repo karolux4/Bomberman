@@ -46,22 +46,8 @@ public class Bomb_spawn_collision : MonoBehaviour {
           if((collision.gameObject.tag=="Player")&&(creator.GetComponent<Additional_power_ups>().bomb_kick))
           {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-            int direction = creator.GetComponent<Movement_physics>().direction; // finding the way player is watching
-            switch(direction)
-            {
-                case 1:
-                    gameObject.GetComponent<Rigidbody>().AddForce(-10, 0, 0, ForceMode.Impulse);
-                    break;
-                case 2:
-                    gameObject.GetComponent<Rigidbody>().AddForce(10, 0, 0, ForceMode.Impulse);
-                    break;
-                case 3:
-                    gameObject.GetComponent<Rigidbody>().AddForce(0, 0, 10, ForceMode.Impulse);
-                    break;
-                case 4:
-                    gameObject.GetComponent<Rigidbody>().AddForce(0, 0, -10, ForceMode.Impulse);
-                    break;
-            }
+            Vector3 direction = creator.GetComponent<Transform>().forward; // finding the way player is watching
+            gameObject.GetComponent<Rigidbody>().AddForce(direction*10f, ForceMode.Impulse);
             gameObject.GetComponent<SphereCollider>().material = null;
             kicked = true;
           }
