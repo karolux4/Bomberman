@@ -31,28 +31,8 @@ public class Shooting_physics : MonoBehaviour {
 	}
     void Shoot()
     {
-        float strengthX = 0, strengthZ = 0;
         Vector3 pos = player.GetComponent<Transform>().localPosition; // getting player position
-        int direction = this.gameObject.GetComponent<Movement_physics>().direction;
-        switch(direction) // finding the way player is watching
-         {
-             case 1:
-                 pos = new Vector3(pos.x - 0.7f, pos.y, pos.z);
-                 strengthX = -strength;
-                 break;
-             case 2:
-                 pos = new Vector3(pos.x + 0.7f, pos.y, pos.z);
-                 strengthX = strength;
-                 break;
-             case 3:
-                 pos = new Vector3(pos.x, pos.y, pos.z + 0.7f);
-                 strengthZ = strength;
-                 break;
-             case 4:
-                 pos = new Vector3(pos.x, pos.y, pos.z - 0.7f);
-                 strengthZ = -strength;
-                 break;
-         }
+        pos += transform.forward;
         bomb.GetComponent<Transform>().localPosition = pos; // changing bomb location
         GameObject player_bomb= Instantiate(bomb); // creating bomb in the scene
         player_bomb.name = player.name + "_bomb_"+count; // renaming bomb
@@ -62,7 +42,7 @@ public class Shooting_physics : MonoBehaviour {
         sphereCollider.material = bounce;
         Rigidbody rb = player_bomb.AddComponent<Rigidbody>();
         rb.freezeRotation = true;
-        rb.AddForce(strengthX,0,strengthZ,ForceMode.Impulse);
+        rb.AddForce(transform.forward * strength, ForceMode.Impulse);
         player_bomb.AddComponent<Bomb_height_bug_fix>();
         player_bomb.GetComponent<Bomb_height_bug_fix>().creator = player;
         player_bomb.AddComponent<Bomb_spawn_collision>();
