@@ -39,7 +39,10 @@ public class Shooting_physics : MonoBehaviour {
         player_bomb.layer = 12;
         SphereCollider sphereCollider = player_bomb.AddComponent<SphereCollider>() as SphereCollider; // adding colliders and rigidbody
         sphereCollider.radius = bomb_collision_radius;
-        sphereCollider.material = bounce;
+        if (player.GetComponent<Additional_power_ups>().bounce_limit != 0)
+        {
+            sphereCollider.material = bounce;
+        }
         Rigidbody rb = player_bomb.AddComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.AddForce(transform.forward * strength, ForceMode.Impulse);
