@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Player_Code\Additional_power_ups.cs" />
+    <Compile Include="Assets\Player_Code\AI_Movement.cs" />
     <Compile Include="Assets\Player_Code\Bomb_explosion.cs" />
     <Compile Include="Assets\Player_Code\Bomb_height_bug_fix.cs" />
     <Compile Include="Assets\Player_Code\Bomb_spawn_collision.cs" />
