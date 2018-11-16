@@ -57,22 +57,28 @@ public class Bomb_spawn_collision : MonoBehaviour {
         yield return null;
         this.gameObject.GetComponent<Transform>().position = this.gameObject.GetComponent<Transform>().position + Vector3.zero;
         yield return null;
-        Debug.Log(collided);
         if (collided)
         {
-            Debug.Log(this.gameObject.GetComponent<Transform>().localPosition);
-            Debug.Log(creator.GetComponent<Transform>().localPosition);
             Destroy(this.gameObject);
-            creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
-            if (creator.GetComponent<Shooting_physics>().count > 0)
+            if (creator.name == "Player")
             {
-                creator.GetComponent<Shooting_physics>().count--;
+                creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
+                if (creator.GetComponent<Shooting_physics>().count > 0)
+                {
+                    creator.GetComponent<Shooting_physics>().count--;
+                }
+            }
+            else
+            {
+                creator.GetComponent<AI_Shooting>().allowed_to_throw = true;
+                if (creator.GetComponent<AI_Shooting>().count > 0)
+                {
+                    creator.GetComponent<AI_Shooting>().count--;
+                }
             }
         }
         else
         {
-            Debug.Log(this.gameObject.GetComponent<Transform>().localPosition);
-            Debug.Log(creator.GetComponent<Transform>().localPosition);
             this.gameObject.AddComponent<Bomb_explosion>();
             this.gameObject.GetComponent<Bomb_explosion>().creator = creator;
             this.gameObject.GetComponent<Bomb_explosion>().explosion_vertical = explosion_vertical;

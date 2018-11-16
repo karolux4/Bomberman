@@ -17,10 +17,24 @@ public class Bomb_explosion : MonoBehaviour {
     {
         this.gameObject.layer = 11;
         yield return new WaitForSeconds(1);
-        creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
+        if (creator.name == "Player")
+        {
+            creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
+        }
+        else
+        {
+            creator.GetComponent<AI_Shooting>().allowed_to_throw = true;
+        }
         yield return new WaitForSeconds(2);
         Explode("No");
-        creator.GetComponent<Shooting_physics>().count--;
+        if (creator.name == "Player")
+        {
+            creator.GetComponent<Shooting_physics>().count--;
+        }
+        else
+        {
+            creator.GetComponent<AI_Shooting>().count--;
+        }
         Destroy(this.gameObject);
     }
     public void Explode(string message)

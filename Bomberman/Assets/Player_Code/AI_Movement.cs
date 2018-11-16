@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class AI_Movement : MonoBehaviour {
     public Rigidbody rb;
-    private string moving_direction;
+    public string moving_direction;
     private string second_prev_direction = "";
 	// Use this for initialization
 	void Start () {
         List<string> available_directions = AvailableDirections("");
         moving_direction = available_directions[Random.Range(0, available_directions.Count)];
-        Debug.Log(moving_direction);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if(Throw_Bomb(moving_direction)&&gameObject.GetComponent<AI_Shooting>().allowed_to_throw&&gameObject.GetComponent<AI_Shooting>().count<gameObject.GetComponent<Additional_power_ups>().limit    )
+        {
+            gameObject.GetComponent<AI_Shooting>().Shoot();
+        }
         float x = 0,  z = 0;
 		switch(moving_direction)
         {
@@ -39,24 +42,67 @@ public class AI_Movement : MonoBehaviour {
          switch (moving_direction)
          {
              case "Front":
-                 z = -0.2f;
+                 z = -0.1f;
                  break;
              case "Back":
-                 z = 0.2f;
+                 z = 0.1f;
                  break;
              case "Left":
-                 x = 0.2f;
+                 x = 0.1f;
                  break;
              case "Right":
-                 x = -0.2f;
+                 x = -0.1f;
                  break;
          }
          transform.Translate(x, 0, z);
         List<string> available_directions = AvailableDirections(second_prev_direction);
-        Debug.Log(available_directions.Count);
         second_prev_direction = moving_direction;
         moving_direction = available_directions[Random.Range(0, available_directions.Count)];
-        Debug.Log(moving_direction);
+    }
+    private bool Throw_Bomb(string moving_direction)
+    {
+        RaycastHit Front, Back, Left, Right;
+        int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs");
+        switch (moving_direction)
+        {
+            case "Front":
+                if(Physics.Raycast(transform.position,transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
+                {
+                    if(Front.distance>=1&&Front.distance<=2)
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case "Back":
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
+                {
+                    if (Back.distance >= 1 && Back.distance <= 2)
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case "Left":
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
+                {
+                    if (Left.distance >= 1 && Left.distance <= 2)
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case "Right":
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
+                {
+                    if (Right.distance >= 1 && Right.distance <= 2)
+                    {
+                        return true;
+                    }
+                }
+                break;
+        }
+        return false;
     }
     private List<string> AvailableDirections(string prevDirection)
     {
