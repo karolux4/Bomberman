@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd51a7eb2f6446418db6074ef55bbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb_power: 1
+  bomb_power: 2
   limit: 1
   bounce_limit: 0
   speed: 2
@@ -637,7 +637,7 @@ MonoBehaviour:
   explosion_horizontal: {fileID: 1533671589835838, guid: cc3dfe41ae0f6ba4583e1985619c7e58,
     type: 2}
   bounce: {fileID: 13400000, guid: 6be1666332106da41abcb798109b28ae, type: 2}
-  strength: 10
+  strength: 1
   bomb_collision_radius: 0.3
 --- !u!1 &26015586
 GameObject:
@@ -4516,7 +4516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd51a7eb2f6446418db6074ef55bbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb_power: 1
+  bomb_power: 2
   limit: 1
   bounce_limit: 0
   speed: 2
@@ -4539,7 +4539,7 @@ MonoBehaviour:
   explosion_horizontal: {fileID: 1533671589835838, guid: cc3dfe41ae0f6ba4583e1985619c7e58,
     type: 2}
   bounce: {fileID: 13400000, guid: 6be1666332106da41abcb798109b28ae, type: 2}
-  strength: 10
+  strength: 1
   bomb_collision_radius: 0.3
 --- !u!1001 &449182520
 Prefab:
@@ -16811,7 +16811,7 @@ MonoBehaviour:
   explosion_horizontal: {fileID: 1533671589835838, guid: cc3dfe41ae0f6ba4583e1985619c7e58,
     type: 2}
   bounce: {fileID: 13400000, guid: 6be1666332106da41abcb798109b28ae, type: 2}
-  strength: 10
+  strength: 1
   bomb_collision_radius: 0.3
 --- !u!114 &1782995463
 MonoBehaviour:
@@ -16824,7 +16824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd51a7eb2f6446418db6074ef55bbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb_power: 1
+  bomb_power: 2
   limit: 1
   bounce_limit: 0
   speed: 2
