@@ -6,7 +6,7 @@ public class Power_up1 : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag=="Player")
+        if(other.tag=="Player"||other.tag=="AI")
         {
             GameObject Player = other.gameObject;
             if (gameObject.tag == "Strength_power_up")

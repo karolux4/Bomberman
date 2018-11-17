@@ -33,10 +33,10 @@ public class AI_Shooting : MonoBehaviour {
                 pos += transform.forward;
                 break;
             case "Back":
-                pos += transform.InverseTransformVector(transform.forward);
+                pos -= transform.forward;
                 break;
             case "Left":
-                pos += transform.InverseTransformVector(transform.right);
+                pos -= transform.right;
                 break;
             case "Right":
                 pos += transform.right;
@@ -60,10 +60,10 @@ public class AI_Shooting : MonoBehaviour {
                 rb.AddForce(transform.forward * strength, ForceMode.Impulse);
                 break;
             case "Back":
-                rb.AddForce(transform.InverseTransformVector(transform.forward) * strength, ForceMode.Impulse);
+                rb.AddForce(-transform.forward * strength, ForceMode.Impulse);
                 break;
             case "Left":
-                rb.AddForce(transform.InverseTransformVector(transform.right) * strength, ForceMode.Impulse);
+                rb.AddForce(-transform.right * strength, ForceMode.Impulse);
                 break;
             case "Right":
                 rb.AddForce(transform.right * strength, ForceMode.Impulse);

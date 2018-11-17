@@ -42,16 +42,16 @@ public class AI_Movement : MonoBehaviour {
          switch (moving_direction)
          {
              case "Front":
-                 z = -0.1f;
+                 z = -0.15f;
                  break;
              case "Back":
-                 z = 0.1f;
+                 z = 0.15f;
                  break;
              case "Left":
-                 x = 0.1f;
+                 x = 0.15f;
                  break;
              case "Right":
-                 x = -0.1f;
+                 x = -0.15f;
                  break;
          }
          transform.Translate(x, 0, z);
@@ -68,7 +68,14 @@ public class AI_Movement : MonoBehaviour {
             case "Front":
                 if(Physics.Raycast(transform.position,transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
                 {
-                    if(Front.distance>=1&&Front.distance<=2)
+                    if(Front.collider.GetComponentInParent<BoxCollider>()==null)
+                    {
+                        if(Front.collider.tag=="Player"||Front.collider.tag=="AI")
+                        {
+                            return true;
+                        }
+                    }
+                    else if(Front.distance>=1&&Front.distance<=2&&Front.collider.GetComponentInParent<BoxCollider>().tag=="Boxes")
                     {
                         return true;
                     }
@@ -77,7 +84,14 @@ public class AI_Movement : MonoBehaviour {
             case "Back":
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
                 {
-                    if (Back.distance >= 1 && Back.distance <= 2)
+                    if (Back.collider.GetComponentInParent<BoxCollider>() == null)
+                    {
+                        if (Back.collider.tag == "Player" || Back.collider.tag == "AI")
+                        {
+                            return true;
+                        }
+                    }
+                    else if (Back.distance >= 1 && Back.distance <= 2 && Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
                     {
                         return true;
                     }
@@ -86,7 +100,14 @@ public class AI_Movement : MonoBehaviour {
             case "Left":
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
                 {
-                    if (Left.distance >= 1 && Left.distance <= 2)
+                    if (Left.collider.GetComponentInParent<BoxCollider>() == null)
+                    {
+                        if (Left.collider.tag == "Player" || Left.collider.tag == "AI")
+                        {
+                            return true;
+                        }
+                    }
+                    else if (Left.distance >= 1 && Left.distance <= 2 && Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
                     {
                         return true;
                     }
@@ -95,7 +116,14 @@ public class AI_Movement : MonoBehaviour {
             case "Right":
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
                 {
-                    if (Right.distance >= 1 && Right.distance <= 2)
+                    if (Right.collider.GetComponentInParent<BoxCollider>() == null)
+                    {
+                        if (Right.collider.tag == "Player" || Right.collider.tag == "AI")
+                        {
+                            return true;
+                        }
+                    }
+                    else if (Right.distance >= 1 && Right.distance <= 2 && Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
                     {
                         return true;
                     }

@@ -13,6 +13,7 @@ TagManager:
   - Speed_power_up
   - Extra_life_power_up
   - Bomb_kick_power_up
+  - AI
   layers:
   - Default
   - TransparentFX
