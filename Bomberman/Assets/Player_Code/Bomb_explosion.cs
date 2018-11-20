@@ -16,6 +16,11 @@ public class Bomb_explosion : MonoBehaviour {
     IEnumerator Explosion()
     {
         this.gameObject.layer = 11;
+        this.gameObject.tag = "Bombs";
+        GameObject child = gameObject.transform.GetChild(0).gameObject;
+        child.layer = 11;
+        child.tag = "Bombs";
+        child.name = "Bomb";
         yield return new WaitForSeconds(1);
         if (creator.name == "Player")
         {
@@ -69,15 +74,23 @@ public class Bomb_explosion : MonoBehaviour {
         ExplosionRays(this.gameObject, creator.GetComponent<Additional_power_ups>().bomb_power, true,true,true,true);
         if (message == "Yes")
         {
-            creator.GetComponent<Shooting_physics>().count--;
-            creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
+            if (creator.tag == "Player")
+            {
+                creator.GetComponent<Shooting_physics>().count--;
+                creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
+            }
+            else
+            {
+                creator.GetComponent<AI_Shooting>().count--;
+                creator.GetComponent<AI_Shooting>().allowed_to_throw = true;
+            }
             Destroy(gameObject);
         }
 
     }
     public void ExplosionRays(GameObject obj,float exploding_power, bool front, bool back, bool left, bool right)
     {
-        int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs");
+        int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
         RaycastHit Front, Back, Left, Right;
         if (front)
         {
@@ -90,13 +103,16 @@ public class Bomb_explosion : MonoBehaviour {
                     {
                         if ((distance1 < exploding_power) && (Front.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
                         {
-                            Debug.Log("Hit front");
                             Destroy(Front.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
                         }
                     }
                     if ((distance1 < exploding_power) && (Front.collider.tag == "Player"))
                     {
-                        Debug.Log("Hit player");
+                        Front.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                        ExplosionRays(Front.collider.gameObject, exploding_power - distance1, true, false, false, false);
+                    }
+                    if((distance1<exploding_power)&&(Front.collider.tag=="AI"))
+                    {
                         Front.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
                         ExplosionRays(Front.collider.gameObject, exploding_power - distance1, true, false, false, false);
                     }
@@ -122,13 +138,16 @@ public class Bomb_explosion : MonoBehaviour {
                     {
                         if ((distance1 < exploding_power) && (Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
                         {
-                            Debug.Log("Hit back");
                             Destroy(Back.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
                         }
                     }
                     if ((distance1 < exploding_power) && (Back.collider.tag == "Player"))
                     {
-                        Debug.Log("Hit player");
+                        Back.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                        ExplosionRays(Back.collider.gameObject, exploding_power - distance1, false, true, false, false);
+                    }
+                    if ((distance1 < exploding_power) && (Back.collider.tag == "AI"))
+                    {
                         Back.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
                         ExplosionRays(Back.collider.gameObject, exploding_power - distance1, false, true, false, false);
                     }
@@ -154,14 +173,17 @@ public class Bomb_explosion : MonoBehaviour {
                     {
                         if ((distance1 < exploding_power) && (Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
                         {
-                            Debug.Log("Hit left");
                             Destroy(Left.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
                         }
                     }
 
                     if ((distance1 < exploding_power) && (Left.collider.tag == "Player"))
                     {
-                        Debug.Log("Hit player");
+                        Left.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                        ExplosionRays(Left.collider.gameObject, exploding_power - distance1, false, false, true, false);
+                    }
+                    if ((distance1 < exploding_power) && (Left.collider.tag == "AI"))
+                    {
                         Left.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
                         ExplosionRays(Left.collider.gameObject, exploding_power - distance1, false, false, true, false);
                     }
@@ -187,14 +209,17 @@ public class Bomb_explosion : MonoBehaviour {
                     {
                         if ((distance1 < exploding_power) && (Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
                         {
-                            Debug.Log("Hit right");
                             Destroy(Right.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
                         }
                     }
 
                     if ((distance1 < exploding_power) && (Right.collider.tag == "Player"))
                     {
-                        Debug.Log("Hit player");
+                        Right.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                        ExplosionRays(Right.collider.gameObject, exploding_power - distance1, false, false, false, true);
+                    }
+                    if ((distance1 < exploding_power) && (Right.collider.tag == "AI"))
+                    {
                         Right.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
                         ExplosionRays(Right.collider.gameObject, exploding_power - distance1, false, false, false, true);
                     }
