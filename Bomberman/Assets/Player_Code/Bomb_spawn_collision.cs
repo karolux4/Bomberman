@@ -25,7 +25,7 @@ public class Bomb_spawn_collision : MonoBehaviour {
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }
-        else if((other.tag=="Boxes")||(other.tag=="Walls"))
+        else if((other.tag=="Boxes")||(other.tag=="Walls")||(other.tag=="Bombs"))
         {
             collided = true;
         }
@@ -43,10 +43,32 @@ public class Bomb_spawn_collision : MonoBehaviour {
     }
     private void OnCollisionEnter(Collision collision)
     {
-          if((collision.gameObject.tag=="Player")&&(creator.GetComponent<Additional_power_ups>().bomb_kick))
+          if(((collision.gameObject.tag=="Player")||(collision.gameObject.tag=="AI"))&&(creator.GetComponent<Additional_power_ups>().bomb_kick))
           {
+            Vector3 direction = new Vector3();
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-            Vector3 direction = creator.GetComponent<Transform>().forward; // finding the way player is watching
+            if (collision.gameObject.tag == "Player")
+            {
+                direction = creator.GetComponent<Transform>().forward; // finding the way player is watching
+            }
+            else
+            {
+                switch(creator.GetComponent<AI_Movement>().moving_direction)
+                {
+                    case "Front":
+                        direction = new Vector3(0f, 0f, 1f);
+                        break;
+                    case "Back":
+                        direction = new Vector3(0f, 0f, -1f);
+                        break;
+                    case "Left":
+                        direction = new Vector3(-1f, 0f, 0f);
+                        break;
+                    case "Right":
+                        direction = new Vector3(1f, 0f, 0f);
+                        break;
+                }
+            }
             gameObject.GetComponent<Rigidbody>().AddForce(direction*10f, ForceMode.Impulse);
             gameObject.GetComponent<SphereCollider>().material = null;
             kicked = true;
@@ -57,22 +79,28 @@ public class Bomb_spawn_collision : MonoBehaviour {
         yield return null;
         this.gameObject.GetComponent<Transform>().position = this.gameObject.GetComponent<Transform>().position + Vector3.zero;
         yield return null;
-        Debug.Log(collided);
         if (collided)
         {
-            Debug.Log(this.gameObject.GetComponent<Transform>().localPosition);
-            Debug.Log(creator.GetComponent<Transform>().localPosition);
             Destroy(this.gameObject);
-            creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
-            if (creator.GetComponent<Shooting_physics>().count > 0)
+            if (creator.name == "Player")
             {
-                creator.GetComponent<Shooting_physics>().count--;
+                creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
+                if (creator.GetComponent<Shooting_physics>().count > 0)
+                {
+                    creator.GetComponent<Shooting_physics>().count--;
+                }
+            }
+            else
+            {
+                creator.GetComponent<AI_Shooting>().allowed_to_throw = true;
+                if (creator.GetComponent<AI_Shooting>().count > 0)
+                {
+                    creator.GetComponent<AI_Shooting>().count--;
+                }
             }
         }
         else
         {
-            Debug.Log(this.gameObject.GetComponent<Transform>().localPosition);
-            Debug.Log(creator.GetComponent<Transform>().localPosition);
             this.gameObject.AddComponent<Bomb_explosion>();
             this.gameObject.GetComponent<Bomb_explosion>().creator = creator;
             this.gameObject.GetComponent<Bomb_explosion>().explosion_vertical = explosion_vertical;

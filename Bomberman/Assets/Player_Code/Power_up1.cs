@@ -6,7 +6,7 @@ public class Power_up1 : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag=="Player")
+        if(other.tag=="Player"||other.tag=="AI")
         {
             GameObject Player = other.gameObject;
             if (gameObject.tag == "Strength_power_up")
@@ -23,7 +23,10 @@ public class Power_up1 : MonoBehaviour {
             }
             else if(gameObject.tag == "Speed_power_up")
             {
-                Player.GetComponent<Additional_power_ups>().speed++;
+                if (Player.GetComponent<Additional_power_ups>().speed != 3)
+                {
+                    Player.GetComponent<Additional_power_ups>().speed += 0.5f;
+                }
             }
             else if(gameObject.tag=="Extra_life_power_up")
             {

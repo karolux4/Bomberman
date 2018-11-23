@@ -15,10 +15,21 @@ public class Bomb_height_bug_fix : MonoBehaviour {
 		if(gameObject.GetComponent<Transform>().localPosition.y>prevY)
         {
             Destroy(this.gameObject);
-            creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
-            if (creator.GetComponent<Shooting_physics>().count > 0)
+            if (creator.name == "Player")
             {
-                creator.GetComponent<Shooting_physics>().count--;
+                creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
+                if (creator.GetComponent<Shooting_physics>().count > 0)
+                {
+                    creator.GetComponent<Shooting_physics>().count--;
+                }
+            }
+            else
+            {
+                creator.GetComponent<AI_Shooting>().allowed_to_throw = true;
+                if (creator.GetComponent<AI_Shooting>().count > 0)
+                {
+                    creator.GetComponent<AI_Shooting>().count--;
+                }
             }
         }
 	}
