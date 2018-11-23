@@ -24,20 +24,21 @@ public class AI_Movement : MonoBehaviour {
         {
             DirectionChange("");
         }
+        CheckForBombs();
         float x = 0,  z = 0;
 		switch(moving_direction)
         {
             case "Front":
-                z = Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed; //speed
+                z = Mathf.Round(Time.deltaTime * 100) / 100 * gameObject.GetComponent<Additional_power_ups>().speed; //speed
                 break;
             case "Back":
-                z = -Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
+                z = -Mathf.Round(Time.deltaTime * 100) / 100 * gameObject.GetComponent<Additional_power_ups>().speed;
                 break;
             case "Left":
-                x = -Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
+                x = -Mathf.Round(Time.deltaTime * 100) / 100 * gameObject.GetComponent<Additional_power_ups>().speed;
                 break;
             case "Right":
-                x = Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
+                x = Mathf.Round(Time.deltaTime*100)/100 * gameObject.GetComponent<Additional_power_ups>().speed;
                 break;
         }
         covered_distance += x + z;
@@ -162,33 +163,38 @@ public class AI_Movement : MonoBehaviour {
     private List<string> AvailableDirections(string prevDirection)
     {
         List<string> available_directions = new List<string>();
-        RaycastHit Front, Back, Left, Right;
+        RaycastHit Front, Back, Left, Right, Front1, Back1, Left1, Right1;
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
-        Vector3 AI_position = transform.position - new Vector3(0f, 0.5f, 0f);// PositionCenter();
-        if (Physics.Raycast(AI_position,transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
+        Vector3 AI_back_position, AI_front_position;
+        PositionCenter(out AI_back_position,out AI_front_position);//transform.position - new Vector3(0f, 0.5f, 0f);// PositionCenter();
+        if ((Physics.Raycast(AI_back_position,transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
+            && (Physics.Raycast(AI_front_position, transform.TransformDirection(Vector3.forward), out Front1, Mathf.Infinity, layer_mask)))
         {
-            if((Front.distance>1)&&(Front.collider.gameObject.layer!=11))
+            if((Front.distance>0.75)&&(Front1.distance>0.75)&&(Front.collider.gameObject.layer!=11))
             {
                 available_directions.Add("Front");
             }
         }
-        if (Physics.Raycast(AI_position, transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
+        if ((Physics.Raycast(AI_back_position, transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))&&
+            (Physics.Raycast(AI_front_position, transform.TransformDirection(Vector3.back), out Back1, Mathf.Infinity, layer_mask)))
         {
-            if (Back.distance > 1 && (Back.collider.gameObject.layer != 11))
+            if (Back.distance > 0.75 &&(Back1.distance > 0.75)&&(Back.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Back");
             }
         }
-        if (Physics.Raycast(AI_position, transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
+        if ((Physics.Raycast(AI_back_position, transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))&&
+            (Physics.Raycast(AI_front_position, transform.TransformDirection(Vector3.left), out Left1, Mathf.Infinity, layer_mask)))
         {
-            if (Left.distance > 1 && (Left.collider.gameObject.layer != 11))
+            if (Left.distance > 0.75 && (Left1.distance > 0.75) && (Left.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Left");
             }
         }
-        if (Physics.Raycast(AI_position, transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
+        if ((Physics.Raycast(AI_back_position, transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))&&
+            (Physics.Raycast(AI_front_position, transform.TransformDirection(Vector3.right), out Right1, Mathf.Infinity, layer_mask)))
         {
-            if (Right.distance > 1 && (Right.collider.gameObject.layer != 11))
+            if (Right.distance > 0.75 && (Right1.distance > 0.75) && (Right.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Right");
             }
@@ -217,6 +223,10 @@ public class AI_Movement : MonoBehaviour {
                     {
                         return true;
                     }
+                    if(Front.distance<=2 && Front.collider.tag=="Bombs")
+                    {
+                        DirectionChange(moving_direction);
+                    }
                 }
                 else if (Front.distance <= 1 && Front.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
                 {
@@ -233,6 +243,10 @@ public class AI_Movement : MonoBehaviour {
                     if (Back.distance <= 1 && Back.collider.tag == "Player" || Back.collider.tag == "AI")
                     {
                         return true;
+                    }
+                    if (Back.distance <= 2 && Back.collider.tag == "Bombs")
+                    {
+                        DirectionChange(moving_direction);
                     }
                 }
                 else if (Back.distance <= 1 && Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
@@ -251,6 +265,10 @@ public class AI_Movement : MonoBehaviour {
                     {
                         return true;
                     }
+                    if (Left.distance <= 2 && Left.collider.tag == "Bombs")
+                    {
+                       DirectionChange(moving_direction);
+                    }
                 }
                 else if (Left.distance <= 1 && Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
                 {
@@ -267,6 +285,10 @@ public class AI_Movement : MonoBehaviour {
                     if (Right.distance <= 1 && Right.collider.tag == "Player" || Right.collider.tag == "AI")
                     {
                         return true;
+                    }
+                    if (Right.distance <= 2 && Right.collider.tag == "Bombs")
+                    {
+                       DirectionChange(moving_direction);
                     }
                 }
                 else if (Right.distance<=1 && Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
@@ -324,24 +346,72 @@ public class AI_Movement : MonoBehaviour {
             moving_direction = temp_moving_direction;
         }
     }
-    private Vector3 PositionCenter() // in progress
+    private void CheckForBombs()
     {
-        Vector3 new_position = transform.position;
+        RaycastHit Front, Back, Left, Right;
+        int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
+        switch (moving_direction)
+        {
+            case "Front":
+                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.forward), out Front, Mathf.Infinity, layer_mask))
+                {
+                    if(Front.collider.tag=="Bombs")
+                    {
+                        DirectionChange(moving_direction);
+                    }
+                }
+                    break;
+            case "Back":
+                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
+                {
+                    if(Back.collider.tag=="Bombs")
+                    {
+                        DirectionChange(moving_direction);
+                    }
+                }
+                break;
+            case "Left":
+                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
+                {
+                    if (Left.collider.tag == "Bombs")
+                    {
+                        DirectionChange(moving_direction);
+                    }
+                }
+                break;
+            case "Right":
+                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
+                {
+                    if (Right.collider.tag == "Bombs")
+                    {
+                        DirectionChange(moving_direction);
+                    }
+                }
+                break;
+        }
+    }
+    private void PositionCenter(out Vector3 back_position, out Vector3 front_position) // in progress
+    {
+        back_position = transform.position;
+        front_position = transform.position;
         switch(moving_direction)
         {
             case "Front":
-                new_position = transform.position + new Vector3(0f, -0.5f, -0.25f);
+                back_position = transform.position + new Vector3(0f, -0.5f, -0.282f);
+                front_position = transform.position + new Vector3(0f, -0.5f, 0.282f);
                 break;
             case "Back":
-                new_position = transform.position + new Vector3(0f, -0.5f, 0.25f);
+                back_position = transform.position + new Vector3(0f, -0.5f, 0.282f);
+                front_position = transform.position + new Vector3(0f, -0.5f, -0.282f);
                 break;
             case "Left":
-                new_position = transform.position + new Vector3(0.25f, -0.5f, 0f);
+                back_position = transform.position + new Vector3(0.282f, -0.5f, 0f);
+                front_position = transform.position + new Vector3(-0.282f, -0.5f, 0f);
                 break;
             case "Right":
-                new_position = transform.position + new Vector3(-0.25f, -0.5f, 0f);
+                back_position = transform.position + new Vector3(-0.282f, -0.5f, 0f);
+                front_position = transform.position + new Vector3(0.282f, -0.5f, 0f);
                 break;
         }
-        return new_position;
     }
 }
