@@ -18,13 +18,16 @@ public class CameraRotation : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        var mouse_delta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-        mouse_delta = Vector2.Scale(mouse_delta, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
-        smooth.x = Mathf.Lerp(smooth.x, mouse_delta.x, 1f / smoothing);
-        smooth.y = Mathf.Lerp(smooth.y, mouse_delta.y, 1f / smoothing);
-        prev_mouse_pos += smooth;
+        if (Time.timeScale != 0)
+        {
+            var mouse_delta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            mouse_delta = Vector2.Scale(mouse_delta, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
+            smooth.x = Mathf.Lerp(smooth.x, mouse_delta.x, 1f / smoothing);
+            smooth.y = Mathf.Lerp(smooth.y, mouse_delta.y, 1f / smoothing);
+            prev_mouse_pos += smooth;
 
-        transform.localRotation = Quaternion.AngleAxis(-prev_mouse_pos.y, Vector3.right);
-        player.transform.localRotation = Quaternion.AngleAxis(prev_mouse_pos.x, player.transform.up);
+            transform.localRotation = Quaternion.AngleAxis(-prev_mouse_pos.y, Vector3.right);
+            player.transform.localRotation = Quaternion.AngleAxis(prev_mouse_pos.x, player.transform.up);
+        }
 	}
 }

@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_Menu : MonoBehaviour {
-    public void Show_Menu()
+    public void Resume()
     {
-        Debug.Log("MENU");
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
+    }
+    public void Quit()
+    {
+        //quit to main menu
     }
 }

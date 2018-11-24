@@ -23,22 +23,26 @@ public class AI_Movement : MonoBehaviour {
         else if (covered_distance > 1)
         {
             DirectionChange("");
+            if(gameObject.name=="AI_1")
+            {
+                Debug.Log(gameObject.transform.localPosition);
+            }
         }
         CheckForBombs();
         float x = 0,  z = 0;
 		switch(moving_direction)
         {
             case "Front":
-                z = Mathf.Round(Time.deltaTime * 100) / 100 * gameObject.GetComponent<Additional_power_ups>().speed; //speed
+                z = Time.deltaTime* gameObject.GetComponent<Additional_power_ups>().speed; //speed
                 break;
             case "Back":
-                z = -Mathf.Round(Time.deltaTime * 100) / 100 * gameObject.GetComponent<Additional_power_ups>().speed;
+                z = -Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
                 break;
             case "Left":
-                x = -Mathf.Round(Time.deltaTime * 100) / 100 * gameObject.GetComponent<Additional_power_ups>().speed;
+                x = -Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
                 break;
             case "Right":
-                x = Mathf.Round(Time.deltaTime*100)/100 * gameObject.GetComponent<Additional_power_ups>().speed;
+                x = Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
                 break;
         }
         covered_distance += x + z;
@@ -46,30 +50,45 @@ public class AI_Movement : MonoBehaviour {
 	}
     private void OnCollisionEnter(Collision collision)
     {
-        float x = 0, z = 0;
         if (collision.gameObject.tag != "Player")
         {
-            switch (moving_direction)
-            {
-                case "Front":
-                    z = -0.2f;
-                    break;
-                case "Back":
-                    z = 0.2f;
-                    break;
-                case "Left":
-                    x = 0.2f;
-                    break;
-                case "Right":
-                    x = -0.2f;
-                    break;
-            }
-            transform.Translate(x, 0, z);
+            float posX, posZ;
+            CenterPosition(gameObject, out posX, out posZ);
+
+            transform.localPosition = new Vector3(posX, 1.72f, posZ);
         }
         List<string> available_directions = AvailableDirections(second_prev_direction);
         second_prev_direction = moving_direction;
-        moving_direction = available_directions[Random.Range(0, available_directions.Count)];
+        if (available_directions.Count == 0)
+        {
+            moving_direction = "";
+        }
+        else
+        {
+            moving_direction = available_directions[Random.Range(0, available_directions.Count)];
+        }
         covered_distance = 0;
+    }
+    private void CenterPosition(GameObject obj, out float posX, out float posZ)
+    {
+        Vector3 pos = new Vector3();
+        pos = obj.GetComponent<Transform>().localPosition;
+        if (pos.x >= 0)
+        {
+            posX = (int)pos.x + 0.5f;
+        }
+        else
+        {
+            posX = Mathf.Sign(pos.x) * (Mathf.Abs((int)pos.x) + 0.5f);
+        }
+        if (pos.z >= 0)
+        {
+            posZ = (int)pos.z + 0.5f;
+        }
+        else
+        {
+            posZ = Mathf.Sign(pos.z) * (Mathf.Abs((int)pos.z) + 0.5f);
+        }
     }
     private bool Throw_Bomb(string moving_direction)
     {
@@ -163,38 +182,35 @@ public class AI_Movement : MonoBehaviour {
     private List<string> AvailableDirections(string prevDirection)
     {
         List<string> available_directions = new List<string>();
-        RaycastHit Front, Back, Left, Right, Front1, Back1, Left1, Right1;
+        RaycastHit Front, Back, Left, Right;
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
-        Vector3 AI_back_position, AI_front_position;
-        PositionCenter(out AI_back_position,out AI_front_position);//transform.position - new Vector3(0f, 0.5f, 0f);// PositionCenter();
-        if ((Physics.Raycast(AI_back_position,transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
-            && (Physics.Raycast(AI_front_position, transform.TransformDirection(Vector3.forward), out Front1, Mathf.Infinity, layer_mask)))
+        /* Vector3 AI_back_position, AI_front_position;
+         PositionCenter(out AI_back_position,out AI_front_position);//transform.position - new Vector3(0f, 0.5f, 0f);// PositionCenter();*/
+        Vector3 AI_position = transform.position - new Vector3(0f, 0.5f, 0f);
+        if (Physics.SphereCast(AI_position,0.3f,transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
         {
-            if((Front.distance>0.75)&&(Front1.distance>0.75)&&(Front.collider.gameObject.layer!=11))
+            if((Front.distance>0.4)&&(Front.collider.gameObject.layer!=11))
             {
                 available_directions.Add("Front");
             }
         }
-        if ((Physics.Raycast(AI_back_position, transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))&&
-            (Physics.Raycast(AI_front_position, transform.TransformDirection(Vector3.back), out Back1, Mathf.Infinity, layer_mask)))
+        if (Physics.SphereCast(AI_position,0.3f, transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
         {
-            if (Back.distance > 0.75 &&(Back1.distance > 0.75)&&(Back.collider.gameObject.layer != 11))
+            if (Back.distance > 0.4&&(Back.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Back");
             }
         }
-        if ((Physics.Raycast(AI_back_position, transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))&&
-            (Physics.Raycast(AI_front_position, transform.TransformDirection(Vector3.left), out Left1, Mathf.Infinity, layer_mask)))
+        if (Physics.SphereCast(AI_position,0.3f, transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
         {
-            if (Left.distance > 0.75 && (Left1.distance > 0.75) && (Left.collider.gameObject.layer != 11))
+            if (Left.distance > 0.4 && (Left.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Left");
             }
         }
-        if ((Physics.Raycast(AI_back_position, transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))&&
-            (Physics.Raycast(AI_front_position, transform.TransformDirection(Vector3.right), out Right1, Mathf.Infinity, layer_mask)))
+        if (Physics.SphereCast(AI_position,0.3f, transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
         {
-            if (Right.distance > 0.75 && (Right1.distance > 0.75) && (Right.collider.gameObject.layer != 11))
+            if (Right.distance > 0.4 && (Right.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Right");
             }
@@ -302,48 +318,55 @@ public class AI_Movement : MonoBehaviour {
     private void DirectionChange(string prev_direction)
     {
         List<string> available_directions = AvailableDirections(prev_direction);
-        string temp_moving_direction = available_directions[Random.Range(0, available_directions.Count)];
-        if (prev_direction == "")
+        if (available_directions.Count == 0)
         {
-            switch (temp_moving_direction)
-            {
-                case "Front":
-                    if (moving_direction != "Back")
-                    {
-                        moving_direction = temp_moving_direction;
-                        // PositionNeutralization();
-                        covered_distance = 0;
-                    }
-                    break;
-                case "Back":
-                    if (moving_direction != "Front")
-                    {
-                        moving_direction = temp_moving_direction;
-                        // PositionNeutralization();
-                        covered_distance = 0;
-                    }
-                    break;
-                case "Left":
-                    if (moving_direction != "Right")
-                    {
-                        moving_direction = temp_moving_direction;
-                        // PositionNeutralization();
-                        covered_distance = 0;
-                    }
-                    break;
-                case "Right":
-                    if (moving_direction != "Left")
-                    {
-                        moving_direction = temp_moving_direction;
-                        //PositionNeutralization();
-                        covered_distance = 0;
-                    }
-                    break;
-            }
+            moving_direction = "";
         }
         else
         {
-            moving_direction = temp_moving_direction;
+            string temp_moving_direction = available_directions[Random.Range(0, available_directions.Count)];
+            if (prev_direction == "")
+            {
+                switch (temp_moving_direction)
+                {
+                    case "Front":
+                        if (moving_direction != "Back")
+                        {
+                            moving_direction = temp_moving_direction;
+                            // PositionNeutralization();
+                            covered_distance = 0;
+                        }
+                        break;
+                    case "Back":
+                        if (moving_direction != "Front")
+                        {
+                            moving_direction = temp_moving_direction;
+                            // PositionNeutralization();
+                            covered_distance = 0;
+                        }
+                        break;
+                    case "Left":
+                        if (moving_direction != "Right")
+                        {
+                            moving_direction = temp_moving_direction;
+                            // PositionNeutralization();
+                            covered_distance = 0;
+                        }
+                        break;
+                    case "Right":
+                        if (moving_direction != "Left")
+                        {
+                            moving_direction = temp_moving_direction;
+                            //PositionNeutralization();
+                            covered_distance = 0;
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                moving_direction = temp_moving_direction;
+            }
         }
     }
     private void CheckForBombs()
@@ -388,9 +411,14 @@ public class AI_Movement : MonoBehaviour {
                     }
                 }
                 break;
+            case "":
+                {
+                    DirectionChange("");
+                    break;
+                }
         }
     }
-    private void PositionCenter(out Vector3 back_position, out Vector3 front_position) // in progress
+  /*  private void PositionCenter(out Vector3 back_position, out Vector3 front_position) // in progress
     {
         back_position = transform.position;
         front_position = transform.position;
@@ -413,5 +441,5 @@ public class AI_Movement : MonoBehaviour {
                 front_position = transform.position + new Vector3(0.282f, -0.5f, 0f);
                 break;
         }
-    }
+    }*/
 }

@@ -44,25 +44,9 @@ public class Bomb_explosion : MonoBehaviour {
     }
     public void Explode(string message)
     {
-        exploding = true;
-        Vector3 pos = gameObject.GetComponent<Transform>().localPosition;
         float posX, posZ;
-        if(pos.x>=0)
-        {
-            posX = (int)pos.x + 0.5f;
-        }
-        else
-        {
-            posX= Mathf.Sign(pos.x) * (Mathf.Abs((int)pos.x) + 0.5f);
-        }
-        if (pos.z >= 0)
-        {
-            posZ = (int)pos.z + 0.5f;
-        }
-        else
-        {
-            posZ = Mathf.Sign(pos.z) * (Mathf.Abs((int)pos.z) + 0.5f);
-        }
+        exploding = true;
+        CenterPosition(gameObject,out posX,out posZ);
         explosion_vertical.GetComponent<Transform>().localPosition = new Vector3(posX, 1.5f, posZ);
         explosion_horizontal.GetComponent<Transform>().localPosition = new Vector3(posX, 1.5f, posZ);
         explosion_vertical.GetComponent<ParticleSystem>().startSpeed = creator.GetComponent<Additional_power_ups>().bomb_power* 5f;
@@ -90,11 +74,14 @@ public class Bomb_explosion : MonoBehaviour {
     }
     public void ExplosionRays(GameObject obj,float exploding_power, bool front, bool back, bool left, bool right)
     {
+        float posX, posZ;
+        CenterPosition(obj, out posX, out posZ);
+        Vector3 position = new Vector3(posX, gameObject.transform.localPosition.y, posZ);
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
         RaycastHit Front, Back, Left, Right;
         if (front)
         {
-            if (Physics.Raycast(obj.GetComponent<Transform>().position, obj.GetComponent<Transform>().TransformDirection(Vector3.forward), out Front, Mathf.Infinity, layer_mask))
+            if (Physics.SphereCast(position,0.48f, obj.GetComponent<Transform>().TransformDirection(Vector3.forward), out Front, Mathf.Infinity, layer_mask))
             {
                 float distance1 = Front.distance;
                 if (Front.collider.gameObject.layer != 11)
@@ -129,7 +116,7 @@ public class Bomb_explosion : MonoBehaviour {
         }
         if (back)
         {
-            if (Physics.Raycast(obj.GetComponent<Transform>().position, obj.GetComponent<Transform>().TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
+            if (Physics.SphereCast(position,0.48f, obj.GetComponent<Transform>().TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
             {
                 float distance1 = Back.distance;
                 if (Back.collider.gameObject.layer != 11)
@@ -164,7 +151,7 @@ public class Bomb_explosion : MonoBehaviour {
         }
         if (left)
         {
-            if (Physics.Raycast(obj.GetComponent<Transform>().position, obj.GetComponent<Transform>().TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
+            if (Physics.SphereCast(position,0.48f, obj.GetComponent<Transform>().TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
             {
                 float distance1 = Left.distance;
                 if (Left.collider.gameObject.layer != 11)
@@ -200,7 +187,7 @@ public class Bomb_explosion : MonoBehaviour {
         }
         if (right)
         {
-            if (Physics.Raycast(obj.GetComponent<Transform>().position, obj.GetComponent<Transform>().TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
+            if (Physics.SphereCast(position,0.48f, obj.GetComponent<Transform>().TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
             {
                 float distance1 = Right.distance;
                 if (Right.collider.gameObject.layer != 11)
@@ -233,6 +220,27 @@ public class Bomb_explosion : MonoBehaviour {
                     }
                 }
             }
+        }
+    }
+    private void CenterPosition(GameObject obj, out float posX, out float posZ)
+    {
+        Vector3 pos = new Vector3();
+        pos = obj.GetComponent<Transform>().localPosition;
+        if (pos.x >= 0)
+        {
+            posX = (int)pos.x + 0.5f;
+        }
+        else
+        {
+            posX = Mathf.Sign(pos.x) * (Mathf.Abs((int)pos.x) + 0.5f);
+        }
+        if (pos.z >= 0)
+        {
+            posZ = (int)pos.z + 0.5f;
+        }
+        else
+        {
+            posZ = Mathf.Sign(pos.z) * (Mathf.Abs((int)pos.z) + 0.5f);
         }
     }
 }

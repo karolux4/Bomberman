@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Movement_physics : MonoBehaviour {
 
-     public Rigidbody rd;
-     public int direction = 3;
+    public Rigidbody rd;
+    public int direction = 3;
+    public GameObject PauseMenu, UI;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -19,9 +20,12 @@ public class Movement_physics : MonoBehaviour {
          var z = Input.GetAxis("Vertical") * Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
          transform.Translate(x, 0, z);
 
-        if(Input.GetKeyDown("escape"))
+        if(Input.GetKeyDown(KeyCode.Escape)&&(!PauseMenu.activeInHierarchy))
         {
+            Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
+            UI.SetActive(false);
+            PauseMenu.SetActive(true);
         }
      }
 }
