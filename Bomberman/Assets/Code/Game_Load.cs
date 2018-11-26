@@ -8,6 +8,7 @@ public class Game_Load : MonoBehaviour {
     public GameObject Player;
     public Sprite Heart;
     private int existing_hearts;
+    public GameObject Damage;
 	// Use this for initialization
 	void Start () {
         existing_hearts = Player.GetComponent<Additional_power_ups>().lifes_count;
@@ -28,7 +29,6 @@ public class Game_Load : MonoBehaviour {
         {
             for(int i=existing_hearts;i < Player.GetComponent<Additional_power_ups>().lifes_count;i++)
             {
-                Debug.Log("New_heart");
                 GameObject obj = new GameObject("Heart" + (i + 1));
                 obj.AddComponent<Image>();
                 obj.GetComponent<Image>().sprite = Heart;
@@ -41,6 +41,9 @@ public class Game_Load : MonoBehaviour {
         }
         else if(existing_hearts> Player.GetComponent<Additional_power_ups>().lifes_count)
         {
+            RectTransform rec = Damage.GetComponent<RectTransform>();
+            rec.sizeDelta = new Vector2(Screen.width, Screen.height);
+            Damage.SetActive(true);
             for(int i=existing_hearts;i> Player.GetComponent<Additional_power_ups>().lifes_count;i--)
             {
                 if (i > 0)
@@ -49,6 +52,12 @@ public class Game_Load : MonoBehaviour {
                 }
             }
             existing_hearts = Player.GetComponent<Additional_power_ups>().lifes_count;
+            StartCoroutine(DamageWait());
         }
+    }
+    private IEnumerator DamageWait()
+    {
+        yield return new WaitForSeconds(1);
+        Damage.SetActive(false);
     }
 }

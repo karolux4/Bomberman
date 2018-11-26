@@ -55,7 +55,9 @@ public class Bomb_explosion : MonoBehaviour {
         Instantiate(explosion_vertical);
         // horizontal explosion
         Instantiate(explosion_horizontal);
-        ExplosionRays(this.gameObject, creator.GetComponent<Additional_power_ups>().bomb_power, true,true,true,true);
+        List<GameObject> hit_players = new List<GameObject>();
+        int i = -1;
+        ExplosionRays(this.gameObject, creator.GetComponent<Additional_power_ups>().bomb_power,ref i,hit_players);
         if (message == "Yes")
         {
             if (creator.tag == "Player")
@@ -72,152 +74,53 @@ public class Bomb_explosion : MonoBehaviour {
         }
 
     }
-    public void ExplosionRays(GameObject obj,float exploding_power, bool front, bool back, bool left, bool right)
+    public void ExplosionRays(GameObject obj,float exploding_power,ref int i, List<GameObject> hit_players)
     {
         float posX, posZ;
         CenterPosition(obj, out posX, out posZ);
         Vector3 position = new Vector3(posX, gameObject.transform.localPosition.y, posZ);
+        InitialPositionCollision(posX, posZ,ref hit_players);
+        if (i == -1)
+        {
+            for (i = 0; i < 4; i++)
+            {
+                SphereCast(position, exploding_power, ref hit_players, i);
+            }
+        }
+        else
+        {
+            SphereCast(position, exploding_power, ref hit_players, i);
+        }
+    }
+    private void SphereCast(Vector3 position, float exploding_power, ref List<GameObject> hit_players,int i)
+    {
+        RaycastHit Hit;
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
-        RaycastHit Front, Back, Left, Right;
-        if (front)
+        if (Physics.SphereCast(position, 0.48f, Quaternion.Euler(0, i * 90, 0) * transform.forward, out Hit, Mathf.Infinity, layer_mask))
         {
-            if (Physics.SphereCast(position,0.48f, obj.GetComponent<Transform>().TransformDirection(Vector3.forward), out Front, Mathf.Infinity, layer_mask))
+            float distance1 = Hit.distance;
+            if (Hit.collider.gameObject.layer != 11)
             {
-                float distance1 = Front.distance;
-                if (Front.collider.gameObject.layer != 11)
+                if (Hit.collider.GetComponentInParent<BoxCollider>() != null)
                 {
-                    if (Front.collider.GetComponentInParent<BoxCollider>() != null)
+                    if ((distance1 < exploding_power) && (Hit.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
                     {
-                        if ((distance1 < exploding_power) && (Front.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
-                        {
-                            Destroy(Front.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
-                        }
-                    }
-                    if ((distance1 < exploding_power) && (Front.collider.tag == "Player"))
-                    {
-                        Front.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
-                        ExplosionRays(Front.collider.gameObject, exploding_power - distance1, true, false, false, false);
-                    }
-                    if((distance1<exploding_power)&&(Front.collider.tag=="AI"))
-                    {
-                        Front.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
-                        ExplosionRays(Front.collider.gameObject, exploding_power - distance1, true, false, false, false);
+                        Destroy(Hit.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
                     }
                 }
-                else
+                if ((distance1 < exploding_power) && ((Hit.collider.tag == "Player") || (Hit.collider.tag == "AI")))
                 {
-                    if ((distance1 < exploding_power) && (!Front.collider.gameObject.GetComponent<Bomb_explosion>().exploding))
-                    {
-                        Front.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(Front.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
-                        Front.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
-                    }
+                    Hit.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                    hit_players.Add(Hit.collider.gameObject);
+                    ExplosionRays(Hit.collider.gameObject, exploding_power - distance1,ref i, hit_players);
                 }
             }
-        }
-        if (back)
-        {
-            if (Physics.SphereCast(position,0.48f, obj.GetComponent<Transform>().TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
+            else
             {
-                float distance1 = Back.distance;
-                if (Back.collider.gameObject.layer != 11)
+                if ((distance1 < exploding_power) && (!Hit.collider.gameObject.GetComponent<Bomb_explosion>().exploding))
                 {
-                    if (Back.collider.GetComponentInParent<BoxCollider>() != null)
-                    {
-                        if ((distance1 < exploding_power) && (Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
-                        {
-                            Destroy(Back.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
-                        }
-                    }
-                    if ((distance1 < exploding_power) && (Back.collider.tag == "Player"))
-                    {
-                        Back.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
-                        ExplosionRays(Back.collider.gameObject, exploding_power - distance1, false, true, false, false);
-                    }
-                    if ((distance1 < exploding_power) && (Back.collider.tag == "AI"))
-                    {
-                        Back.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
-                        ExplosionRays(Back.collider.gameObject, exploding_power - distance1, false, true, false, false);
-                    }
-                }
-                else
-                {
-                    if ((distance1 < exploding_power) && (!Back.collider.gameObject.GetComponent<Bomb_explosion>().exploding))
-                    {
-                        Back.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(Back.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
-                        Back.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
-                    }
-                }
-            }
-        }
-        if (left)
-        {
-            if (Physics.SphereCast(position,0.48f, obj.GetComponent<Transform>().TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
-            {
-                float distance1 = Left.distance;
-                if (Left.collider.gameObject.layer != 11)
-                {
-                    if (Left.collider.GetComponentInParent<BoxCollider>() != null)
-                    {
-                        if ((distance1 < exploding_power) && (Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
-                        {
-                            Destroy(Left.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
-                        }
-                    }
-
-                    if ((distance1 < exploding_power) && (Left.collider.tag == "Player"))
-                    {
-                        Left.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
-                        ExplosionRays(Left.collider.gameObject, exploding_power - distance1, false, false, true, false);
-                    }
-                    if ((distance1 < exploding_power) && (Left.collider.tag == "AI"))
-                    {
-                        Left.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
-                        ExplosionRays(Left.collider.gameObject, exploding_power - distance1, false, false, true, false);
-                    }
-                }
-                else
-                {
-                    if ((distance1 < exploding_power) && (!Left.collider.gameObject.GetComponent<Bomb_explosion>().exploding))
-                    {
-                        Left.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(Left.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
-                        Left.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
-                    }
-                }
-            }
-        }
-        if (right)
-        {
-            if (Physics.SphereCast(position,0.48f, obj.GetComponent<Transform>().TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
-            {
-                float distance1 = Right.distance;
-                if (Right.collider.gameObject.layer != 11)
-                {
-                    if (Right.collider.GetComponentInParent<BoxCollider>() != null)
-                    {
-                        if ((distance1 < exploding_power) && (Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes"))
-                        {
-                            Destroy(Right.collider.gameObject.GetComponentInParent<BoxCollider>().gameObject);
-                        }
-                    }
-
-                    if ((distance1 < exploding_power) && (Right.collider.tag == "Player"))
-                    {
-                        Right.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
-                        ExplosionRays(Right.collider.gameObject, exploding_power - distance1, false, false, false, true);
-                    }
-                    if ((distance1 < exploding_power) && (Right.collider.tag == "AI"))
-                    {
-                        Right.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
-                        ExplosionRays(Right.collider.gameObject, exploding_power - distance1, false, false, false, true);
-                    }
-                }
-                else
-                {
-                    if ((distance1 < exploding_power) && (!Right.collider.gameObject.GetComponent<Bomb_explosion>().exploding))
-                    {
-                        Right.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(Right.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
-                        Right.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
-                    }
+                    Hit.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(Hit.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
+                    Hit.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
                 }
             }
         }
@@ -240,7 +143,27 @@ public class Bomb_explosion : MonoBehaviour {
         }
         else
         {
-            posZ = Mathf.Sign(pos.z) * (Mathf.Abs((int)pos.z) + 0.5f);
+            posZ = Mathf.Sign(pos.z) * ((int)Mathf.Abs(pos.z) + 0.5f);
+        }
+    }
+    private void InitialPositionCollision(float posX, float posZ, ref List<GameObject> hit_players) // needs fix
+    {
+        RaycastHit hit;
+        Vector3 position = new Vector3(posX, 1.5f, posZ);
+        int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
+        for (int i=0;i<8;i++)
+        {
+            if (Physics.Raycast(position, Quaternion.Euler(0, i * 45, 0) * transform.forward, out hit, 0.5f, layer_mask))
+            {
+                if(hit.collider.tag=="Player"||hit.collider.tag=="AI")
+                {
+                    if (!hit_players.Contains(hit.collider.gameObject))
+                    {
+                        hit.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                        hit_players.Add(hit.collider.gameObject);
+                    }
+                }
+            }
         }
     }
 }

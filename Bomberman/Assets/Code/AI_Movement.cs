@@ -23,10 +23,6 @@ public class AI_Movement : MonoBehaviour {
         else if (covered_distance > 1)
         {
             DirectionChange("");
-            if(gameObject.name=="AI_1")
-            {
-                Debug.Log(gameObject.transform.localPosition);
-            }
         }
         CheckForBombs();
         float x = 0,  z = 0;
@@ -87,7 +83,7 @@ public class AI_Movement : MonoBehaviour {
         }
         else
         {
-            posZ = Mathf.Sign(pos.z) * (Mathf.Abs((int)pos.z) + 0.5f);
+            posZ = Mathf.Sign(pos.z) * ((int)Mathf.Abs(pos.z) + 0.5f);
         }
     }
     private bool Throw_Bomb(string moving_direction)
