@@ -88,90 +88,55 @@ public class AI_Movement : MonoBehaviour {
     }
     private bool Throw_Bomb(string moving_direction)
     {
-        RaycastHit Front, Back, Left, Right;
+        RaycastHit Hit;
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
-        switch (moving_direction)
+        List<string> Directions = new List<string>();
+        Directions.Add("Front");
+        Directions.Add("Right");
+        Directions.Add("Back");
+        Directions.Add("Left");
+        for (int i = 0; i < 4; i++)
         {
-            case "Front":
-                if(Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
+            if (moving_direction == Directions[i])
+            {
+                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), Quaternion.Euler(0,90*i,0)*Vector3.forward, out Hit, Mathf.Infinity, layer_mask))
                 {
-                    if(Front.distance >= 1 && Front.distance <= 2&&Front.collider.GetComponentInParent<BoxCollider>()==null)
+                    if (Hit.distance >= 1 && Hit.distance <= 2 && Hit.collider.GetComponentInParent<BoxCollider>() == null)
                     {
-                        if(Front.collider.tag=="Player"||Front.collider.tag=="AI")
+                        if (Hit.collider.tag == "Player" || Hit.collider.tag == "AI")
                         {
                             return true;
                         }
                     }
-                    else if(Front.distance>=1&&Front.distance<=2&&Front.collider.GetComponentInParent<BoxCollider>().tag=="Boxes")
+                    else if (Hit.distance >= 1 && Hit.distance <= 2 && Hit.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
                     {
                         return true;
                     }
-                    else if(Front.distance>=1&&IsThereDestroyableObject(moving_direction, transform.position + new Vector3(0f, -0.5f, 1f)))
+                    else if (Hit.distance >= 1)
                     {
-                        return true;
-                    }
-                }
-                break;
-            case "Back":
-                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
-                {
-                    if (Back.distance >= 1 && Back.distance <= 2 && Back.collider.GetComponentInParent<BoxCollider>() == null)
-                    {
-                        if (Back.collider.tag == "Player" || Back.collider.tag == "AI")
+                        Vector3 bomb_position = new Vector3();
+                        switch(i)
+                        {
+                            case 0:
+                                bomb_position = transform.position + new Vector3(0f, -0.5f, 1f);
+                                break;
+                            case 1:
+                                bomb_position = transform.position + new Vector3(1f, -0.5f, 0f);
+                                break;
+                            case 2:
+                                bomb_position = transform.position + new Vector3(0f, -0.5f, -1f);
+                                break;
+                            case 3:
+                                bomb_position = transform.position + new Vector3(-1f, -0.5f, 0f);
+                                break;
+                        }
+                        if (IsThereDestroyableObject(moving_direction, bomb_position))
                         {
                             return true;
                         }
                     }
-                    else if (Back.distance >= 1 && Back.distance <= 2 && Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
-                    {
-                        return true;
-                    }
-                    else if (Back.distance >= 1 && IsThereDestroyableObject(moving_direction, transform.position + new Vector3(0f, -0.5f, -1f)))
-                    {
-                        return true;
-                    }
                 }
-                break;
-            case "Left":
-                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
-                {
-                    if (Left.distance >= 1 && Left.distance <= 2 && Left.collider.GetComponentInParent<BoxCollider>() == null)
-                    {
-                        if (Left.collider.tag == "Player" || Left.collider.tag == "AI")
-                        {
-                            return true;
-                        }
-                    }
-                    else if (Left.distance >= 1 && Left.distance <= 2 && Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
-                    {
-                        return true;
-                    }
-                    else if (Left.distance >= 1 && IsThereDestroyableObject(moving_direction, transform.position + new Vector3(-1f, -0.5f, 0f)))
-                    {
-                        return true;
-                    }
-                }
-                break;
-            case "Right":
-                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
-                {
-                    if (Right.distance >= 1 && Right.distance <= 2 && Right.collider.GetComponentInParent<BoxCollider>() == null)
-                    {
-                        if (Right.collider.tag == "Player" || Right.collider.tag == "AI")
-                        {
-                            return true;
-                        }
-                    }
-                    else if (Right.distance >= 1 && Right.distance <= 2 && Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
-                    {
-                        return true;
-                    }
-                    else if (Right.distance >= 1 && IsThereDestroyableObject(moving_direction, transform.position + new Vector3(1f, -0.5f, 0f)))
-                    {
-                        return true;
-                    }
-                }
-                break;
+            }
         }
         return false;
     }
@@ -223,89 +188,34 @@ public class AI_Movement : MonoBehaviour {
     }
     private bool IsThereDestroyableObject(string moving_direction, Vector3 bomb_position)
     {
-        RaycastHit Front, Back, Left, Right;
+        RaycastHit Hit;
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
-        if (moving_direction != "Back")
+        List<string> Directions = new List<string>();
+        Directions.Add("Back");
+        Directions.Add("Left");
+        Directions.Add("Front");
+        Directions.Add("Right");
+        for (int i = 0; i < 4; i++)
         {
-            if (Physics.Raycast(bomb_position, transform.TransformDirection(Vector3.forward), out Front, Mathf.Infinity, layer_mask))
+            if (moving_direction != Directions[i])
             {
-                if (Front.collider.GetComponentInParent<BoxCollider>() == null)
+                if (Physics.Raycast(bomb_position, Quaternion.Euler(0,90*i,0)*Vector3.forward, out Hit, Mathf.Infinity, layer_mask))
                 {
-                    if (Front.distance <= 1 && Front.collider.tag == "Player" || Front.collider.tag == "AI")
+                    if (Hit.collider.GetComponentInParent<BoxCollider>() == null)
+                    {
+                        if (Hit.distance <= 1 && Hit.collider.tag == "Player" || Hit.collider.tag == "AI")
+                        {
+                            return true;
+                        }
+                        if (Hit.distance <= 2 && Hit.collider.tag == "Bombs")
+                        {
+                            DirectionChange(moving_direction);
+                        }
+                    }
+                    else if (Hit.distance <= 1 && Hit.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
                     {
                         return true;
                     }
-                    if(Front.distance<=2 && Front.collider.tag=="Bombs")
-                    {
-                        DirectionChange(moving_direction);
-                    }
-                }
-                else if (Front.distance <= 1 && Front.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
-                {
-                    return true;
-                }
-            }
-        }
-        if (moving_direction != "Front")
-        {
-            if (Physics.Raycast(bomb_position, transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
-            {
-                if (Back.collider.GetComponentInParent<BoxCollider>() == null)
-                {
-                    if (Back.distance <= 1 && Back.collider.tag == "Player" || Back.collider.tag == "AI")
-                    {
-                        return true;
-                    }
-                    if (Back.distance <= 2 && Back.collider.tag == "Bombs")
-                    {
-                        DirectionChange(moving_direction);
-                    }
-                }
-                else if (Back.distance <= 1 && Back.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
-                {
-                    return true;
-                }
-            }
-        }
-        if (moving_direction != "Right")
-        {
-            if (Physics.Raycast(bomb_position, transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
-            {
-                if ( Left.collider.GetComponentInParent<BoxCollider>() == null)
-                {
-                    if (Left.distance <= 1 && Left.collider.tag == "Player" || Left.collider.tag == "AI")
-                    {
-                        return true;
-                    }
-                    if (Left.distance <= 2 && Left.collider.tag == "Bombs")
-                    {
-                       DirectionChange(moving_direction);
-                    }
-                }
-                else if (Left.distance <= 1 && Left.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
-                {
-                    return true;
-                }
-            }
-        }
-        if (moving_direction != "Left")
-        {
-            if (Physics.Raycast(bomb_position, transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
-            {
-                if ( Right.collider.GetComponentInParent<BoxCollider>() == null)
-                {
-                    if (Right.distance <= 1 && Right.collider.tag == "Player" || Right.collider.tag == "AI")
-                    {
-                        return true;
-                    }
-                    if (Right.distance <= 2 && Right.collider.tag == "Bombs")
-                    {
-                       DirectionChange(moving_direction);
-                    }
-                }
-                else if (Right.distance<=1 && Right.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
-                {
-                    return true;
                 }
             }
         }
@@ -414,28 +324,4 @@ public class AI_Movement : MonoBehaviour {
                 }
         }
     }
-  /*  private void PositionCenter(out Vector3 back_position, out Vector3 front_position) // in progress
-    {
-        back_position = transform.position;
-        front_position = transform.position;
-        switch(moving_direction)
-        {
-            case "Front":
-                back_position = transform.position + new Vector3(0f, -0.5f, -0.282f);
-                front_position = transform.position + new Vector3(0f, -0.5f, 0.282f);
-                break;
-            case "Back":
-                back_position = transform.position + new Vector3(0f, -0.5f, 0.282f);
-                front_position = transform.position + new Vector3(0f, -0.5f, -0.282f);
-                break;
-            case "Left":
-                back_position = transform.position + new Vector3(0.282f, -0.5f, 0f);
-                front_position = transform.position + new Vector3(-0.282f, -0.5f, 0f);
-                break;
-            case "Right":
-                back_position = transform.position + new Vector3(-0.282f, -0.5f, 0f);
-                front_position = transform.position + new Vector3(0.282f, -0.5f, 0f);
-                break;
-        }
-    }*/
 }

@@ -70,6 +70,7 @@
     <Compile Include="Assets\Code\CameraRotation.cs" />
     <Compile Include="Assets\Code\Death_physics.cs" />
     <Compile Include="Assets\Code\Game_Load.cs" />
+    <Compile Include="Assets\Code\Main_menu.cs" />
     <Compile Include="Assets\Code\Movement_physics.cs" />
     <Compile Include="Assets\Code\Power_up1.cs" />
     <Compile Include="Assets\Code\Shooting_physics.cs" />
