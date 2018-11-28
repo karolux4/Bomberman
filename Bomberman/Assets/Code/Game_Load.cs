@@ -21,7 +21,7 @@ public class Game_Load : MonoBehaviour {
             obj.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(200*aspect_ratio, 200*aspect_ratio);
             obj.transform.SetParent(this.gameObject.GetComponentInChildren<Canvas>().gameObject.transform);
             float x = -860 + i * 200;
-            float y = -(((float)Screen.width / (float)Screen.height) * 1080)/2+ 100;
+            float y = -(((float)1920 / (float)Screen.width) * Screen.height)/2+ 100;
             Debug.Log(y);
             obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
         }
