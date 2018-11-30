@@ -8,6 +8,8 @@ public class Bomb_explosion : MonoBehaviour {
     public GameObject explosion_horizontal { get; set; }
     public bool exploding { get; set; }
     public Coroutine Explosive;
+    public AudioClip explosion { get; set; }
+    private int audio_count=0;
     // Use this for initialization
     void Start () {
         exploding = false;
@@ -42,8 +44,27 @@ public class Bomb_explosion : MonoBehaviour {
         }
         Destroy(this.gameObject);
     }
+    public void Sound(Transform t)
+    {
+        GameObject Audio = new GameObject();
+        Audio.transform.localPosition = t.localPosition;
+        //Instantiate(Audio);
+        Audio.name = "Audio";
+        AudioSource audio = Audio.AddComponent<AudioSource>();
+        audio.minDistance = 1;
+        audio.rolloffMode = AudioRolloffMode.Linear;
+        audio.spatialBlend = 1;
+        audio.maxDistance = 10;
+        audio.PlayOneShot(explosion);
+        Audio.AddComponent<AudioDestroy>();
+    }
     public void Explode(string message)
     {
+        if (audio_count == 0)
+        {
+            Sound(this.gameObject.GetComponent<Transform>());
+            audio_count++;
+        }
         float posX, posZ;
         exploding = true;
         CenterPosition(gameObject,out posX,out posZ);

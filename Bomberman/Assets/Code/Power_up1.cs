@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Power_up1 : MonoBehaviour {
-
+    public AudioSource power_up;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag=="Player"||other.tag=="AI")
@@ -37,6 +37,10 @@ public class Power_up1 : MonoBehaviour {
                 Player.GetComponent<Additional_power_ups>().bomb_kick = true;
             }
             Destroy(this.gameObject);
+        }
+        if (other.tag =="Player")
+        {
+            power_up.Play();
         }
     }
 }

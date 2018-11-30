@@ -12,6 +12,7 @@ public class AI_Shooting : MonoBehaviour {
     public bool allowed_to_throw { get; set; }
     public float strength;
     public float bomb_collision_radius;
+    public AudioClip explosion;
     // Use this for initialization
     void Start () {
         count = 0;
@@ -75,5 +76,6 @@ public class AI_Shooting : MonoBehaviour {
         AI_bomb.GetComponent<Bomb_spawn_collision>().creator = gameObject;
         AI_bomb.GetComponent<Bomb_spawn_collision>().explosion_vertical = explosion_vertical;
         AI_bomb.GetComponent<Bomb_spawn_collision>().explosion_horizontal = explosion_horizontal;
+        AI_bomb.GetComponent<Bomb_spawn_collision>().explosion = explosion;
     }
 }

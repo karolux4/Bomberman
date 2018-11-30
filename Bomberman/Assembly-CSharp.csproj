@@ -64,6 +64,8 @@
     <Compile Include="Assets\Code\Additional_power_ups.cs" />
     <Compile Include="Assets\Code\AI_Movement.cs" />
     <Compile Include="Assets\Code\AI_Shooting.cs" />
+    <Compile Include="Assets\Code\AudioDestroy.cs" />
+    <Compile Include="Assets\Code\AudioSlider.cs" />
     <Compile Include="Assets\Code\Bomb_explosion.cs" />
     <Compile Include="Assets\Code\Bomb_height_bug_fix.cs" />
     <Compile Include="Assets\Code\Bomb_spawn_collision.cs" />

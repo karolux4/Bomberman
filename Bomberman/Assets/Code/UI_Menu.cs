@@ -12,7 +12,12 @@ public class UI_Menu : MonoBehaviour {
     }
     public void Quit()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene(0);
+    }
+    public void Restart()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

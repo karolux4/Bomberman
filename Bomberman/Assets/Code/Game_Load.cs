@@ -11,6 +11,7 @@ public class Game_Load : MonoBehaviour {
     public GameObject Damage;
 	// Use this for initialization
 	void Start () {
+        Time.timeScale = 1;
         existing_hearts = Player.GetComponent<Additional_power_ups>().lifes_count;
         for (int i = 0; i <existing_hearts;i++)
         {
@@ -45,7 +46,7 @@ public class Game_Load : MonoBehaviour {
         else if(existing_hearts> Player.GetComponent<Additional_power_ups>().lifes_count)
         {
             RectTransform rec = Damage.GetComponent<RectTransform>();
-            rec.sizeDelta = new Vector2(Screen.width, Screen.height);
+            rec.sizeDelta = new Vector2(1920, (((float)1920 / (float)Screen.width) * Screen.height));
             Damage.SetActive(true);
             for(int i=existing_hearts;i> Player.GetComponent<Additional_power_ups>().lifes_count;i--)
             {

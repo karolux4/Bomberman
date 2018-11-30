@@ -6,6 +6,7 @@ public class Bomb_spawn_collision : MonoBehaviour {
     public GameObject creator { get; set; }
     public GameObject explosion_vertical { get; set; }
     public GameObject explosion_horizontal { get; set; }
+    public AudioClip explosion { get; set; }
     public bool collided { get; set; }
     private int bounce_count;
     private bool kicked = false;
@@ -105,6 +106,7 @@ public class Bomb_spawn_collision : MonoBehaviour {
             this.gameObject.GetComponent<Bomb_explosion>().creator = creator;
             this.gameObject.GetComponent<Bomb_explosion>().explosion_vertical = explosion_vertical;
             this.gameObject.GetComponent<Bomb_explosion>().explosion_horizontal = explosion_horizontal;
+            this.gameObject.GetComponent<Bomb_explosion>().explosion = explosion;
         }
     }
 }

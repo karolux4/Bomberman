@@ -13,6 +13,7 @@ public class Shooting_physics : MonoBehaviour {
     public bool allowed_to_throw { get; set; }
     public float strength;
     public float bomb_collision_radius;
+    public AudioClip explosion;
     private void Start()
     {
         count = 0;
@@ -52,5 +53,6 @@ public class Shooting_physics : MonoBehaviour {
         player_bomb.GetComponent<Bomb_spawn_collision>().creator = player;
         player_bomb.GetComponent<Bomb_spawn_collision>().explosion_vertical = explosion_vertical;
         player_bomb.GetComponent<Bomb_spawn_collision>().explosion_horizontal = explosion_horizontal;
+        player_bomb.GetComponent<Bomb_spawn_collision>().explosion = explosion;
     }
 }
