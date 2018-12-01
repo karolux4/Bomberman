@@ -23,7 +23,6 @@ public class Game_Load : MonoBehaviour {
             obj.transform.SetParent(this.gameObject.GetComponentInChildren<Canvas>().gameObject.transform);
             float x = -860 + i * 200;
             float y = -(((float)1920 / (float)Screen.width) * Screen.height)/2+ 100;
-            Debug.Log(y);
             obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
         }
 	}
@@ -33,12 +32,14 @@ public class Game_Load : MonoBehaviour {
         {
             for(int i=existing_hearts;i < Player.GetComponent<Additional_power_ups>().lifes_count;i++)
             {
+                float aspect_ratio = (float)Screen.width / (float)1920;
                 GameObject obj = new GameObject("Heart" + (i + 1));
                 obj.AddComponent<Image>();
                 obj.GetComponent<Image>().sprite = Heart;
+                obj.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(200 * aspect_ratio, 200 * aspect_ratio);
                 obj.transform.SetParent(this.gameObject.GetComponentInChildren<Canvas>().gameObject.transform);
-                float x = (float)Screen.width / (float)1024 * -450 + i * 100;
-                float y = (float)Screen.height / (float)768 * -280;
+                float x = -860 + i * 200;
+                float y = -(((float)1920 / (float)Screen.width) * Screen.height) / 2 + 100;
                 obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
             }
             existing_hearts = Player.GetComponent<Additional_power_ups>().lifes_count;

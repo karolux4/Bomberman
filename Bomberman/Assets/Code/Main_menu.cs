@@ -13,7 +13,7 @@ public class Main_menu : MonoBehaviour {
     }
     public void Exit()
     {
-        Exit();
+        Application.Quit();
     }
     public void Button_click_sound()
     {
@@ -21,6 +21,6 @@ public class Main_menu : MonoBehaviour {
     }
     public void AudioVolume(float slider_value)
     {
-        AudioListener.volume = Mathf.Log10(slider_value) * 20;
+        AudioListener.volume = (float)slider_value/(float)100;
     }
 }

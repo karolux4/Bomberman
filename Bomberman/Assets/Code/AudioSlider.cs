@@ -9,7 +9,7 @@ public class AudioSlider : MonoBehaviour {
     public GameObject text;
     public void Start()
     {
-        slider.value = Mathf.Pow(10, (float)AudioListener.volume / (float)20);
+        slider.value = AudioListener.volume*100;
     }
     public void Update()
     {

@@ -68,6 +68,9 @@ public class Bomb_spawn_collision : MonoBehaviour {
                     case "Right":
                         direction = new Vector3(1f, 0f, 0f);
                         break;
+                    case "":
+                        direction = new Vector3(0f, 0f, 0f);
+                        break;
                 }
             }
             gameObject.GetComponent<Rigidbody>().AddForce(direction*10f, ForceMode.Impulse);
