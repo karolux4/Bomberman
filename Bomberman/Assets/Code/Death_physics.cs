@@ -13,11 +13,11 @@ public class Death_physics : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
             UI.SetActive(false);
             Death_Menu.SetActive(true);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
         else if(gameObject.tag=="AI"&&gameObject.GetComponent<Additional_power_ups>().lifes_count==0)
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
 	}
 }

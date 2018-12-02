@@ -19,7 +19,10 @@ public class Power_up1 : MonoBehaviour {
             }
             else if(gameObject.tag == "Bounce_power_up")
             {
-                Player.GetComponent<Additional_power_ups>().bounce_limit += 10;
+                if (Player.GetComponent<Additional_power_ups>().bounce_limit != 10)
+                {
+                    Player.GetComponent<Additional_power_ups>().bounce_limit += 2;
+                }
             }
             else if(gameObject.tag == "Speed_power_up")
             {

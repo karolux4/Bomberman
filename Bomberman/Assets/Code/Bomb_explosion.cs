@@ -100,7 +100,6 @@ public class Bomb_explosion : MonoBehaviour {
         float posX, posZ;
         CenterPosition(obj, out posX, out posZ);
         Vector3 position = new Vector3(posX, gameObject.transform.localPosition.y, posZ);
-        InitialPositionCollision(posX, posZ,ref hit_players);
         if (i == -1)
         {
             for (i = 0; i < 4; i++)
@@ -112,6 +111,7 @@ public class Bomb_explosion : MonoBehaviour {
         {
             SphereCast(position, exploding_power, ref hit_players, i);
         }
+        InitialPositionCollision(posX, posZ, ref hit_players);
     }
     private void SphereCast(Vector3 position, float exploding_power, ref List<GameObject> hit_players,int i)
     {
@@ -182,6 +182,14 @@ public class Bomb_explosion : MonoBehaviour {
                     {
                         hit.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
                         hit_players.Add(hit.collider.gameObject);
+                    }
+                }
+                else if(hit.collider.tag=="Bombs")
+                {
+                    if (!hit.collider.gameObject.GetComponent<Bomb_explosion>().exploding)
+                    {
+                        hit.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(hit.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
+                        hit.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
                     }
                 }
             }
