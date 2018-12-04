@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Main_menu : MonoBehaviour {
     public AudioSource click;
+    public AudioMixer mixer;
     public void Play()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -19,8 +20,16 @@ public class Main_menu : MonoBehaviour {
     {
         click.Play();
     }
-    public void AudioVolume(float slider_value)
+    public void MasterVolume(float slider_value)
     {
-        AudioListener.volume = (float)slider_value/(float)100;
+        mixer.SetFloat("masterVol",Mathf.Log10(slider_value)*20);
+    }
+    public void SFXVolume(float slider_value)
+    {
+        mixer.SetFloat("sfxVol", Mathf.Log10(slider_value) * 20);
+    }
+    public void MusicVolume(float slider_value)
+    {
+        mixer.SetFloat("musicVol", Mathf.Log10(slider_value) * 20);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Bomb_explosion : MonoBehaviour {
     public GameObject creator { get; set; }
@@ -9,6 +10,7 @@ public class Bomb_explosion : MonoBehaviour {
     public bool exploding { get; set; }
     public Coroutine Explosive;
     public AudioClip explosion { get; set; }
+    public AudioMixerGroup mixer { get; set; }
     private int audio_count=0;
     // Use this for initialization
     void Start () {
@@ -55,6 +57,7 @@ public class Bomb_explosion : MonoBehaviour {
         audio.rolloffMode = AudioRolloffMode.Linear;
         audio.spatialBlend = 1;
         audio.maxDistance = 10;
+        audio.outputAudioMixerGroup = mixer;
         audio.PlayOneShot(explosion);
         Audio.AddComponent<AudioDestroy>();
     }

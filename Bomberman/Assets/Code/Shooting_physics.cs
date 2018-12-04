@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Shooting_physics : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class Shooting_physics : MonoBehaviour {
     public float strength;
     public float bomb_collision_radius;
     public AudioClip explosion;
+    public AudioMixerGroup mixer;
     private void Start()
     {
         count = 0;
@@ -54,5 +56,6 @@ public class Shooting_physics : MonoBehaviour {
         player_bomb.GetComponent<Bomb_spawn_collision>().explosion_vertical = explosion_vertical;
         player_bomb.GetComponent<Bomb_spawn_collision>().explosion_horizontal = explosion_horizontal;
         player_bomb.GetComponent<Bomb_spawn_collision>().explosion = explosion;
+        player_bomb.GetComponent<Bomb_spawn_collision>().mixer = mixer;
     }
 }
