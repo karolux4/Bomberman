@@ -18,17 +18,18 @@ public class Bomb_spawn_collision : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.tag == "Map Objects")&&(bounce_count<creator.GetComponent<Additional_power_ups>().bounce_limit))
+        if((other.tag=="Boxes")||(other.tag=="Walls")||(other.tag=="Bombs"))
+        {
+            collided = true;
+        }
+
+        if ((other.tag == "Map Objects") && (bounce_count < creator.GetComponent<Additional_power_ups>().bounce_limit))
         {
             bounce_count++;
         }
         else if (other.tag == "Map Objects")
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-        }
-        else if((other.tag=="Boxes")||(other.tag=="Walls")||(other.tag=="Bombs"))
-        {
-            collided = true;
         }
     }
     private void OnTriggerStay(Collider other)
@@ -79,6 +80,14 @@ public class Bomb_spawn_collision : MonoBehaviour {
                 gameObject.GetComponent<SphereCollider>().material = null;
                 kicked = true;
             }
+        }
+        else if ((collision.gameObject.tag == "Map Objects") && (bounce_count < creator.GetComponent<Additional_power_ups>().bounce_limit))
+        {
+            bounce_count++;
+        }
+        else if ((collision.gameObject.tag == "Map Objects") && (!kicked))
+        {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }
     }
     private IEnumerator CheckForCollision()

@@ -106,10 +106,10 @@ MonoBehaviour:
     y: 30
     width: 1536
     height: 732
-  m_MinSize: {x: 683, y: 492}
-  m_MaxSize: {x: 14004, y: 14042}
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 46410
+  controlID: 9412
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -130,10 +130,10 @@ MonoBehaviour:
     y: 0
     width: 1216
     height: 732
-  m_MinSize: {x: 406, y: 492}
+  m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 46411
+  controlID: 9413
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -154,10 +154,10 @@ MonoBehaviour:
     y: 0
     width: 1216
     height: 461
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 46412
+  controlID: 9414
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -367,10 +367,10 @@ MonoBehaviour:
     height: 440
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 92270000
+    scrollPos: {x: 0, y: 2105}
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 76aaefff06b0efffa4cbf0ff34ccf0ff12cff0ff24cff0ff9855f5ff9e59f5ff185af5ff2a64f5ff3c64f5ffc287f8ff364cfefff4faffff0000000062360000cc3600000c3700001e380000a8380000e6390000ce3a0000726302008e630200ae630200ce630200e0630200f26302001c64020022640200f6d6020014d8020000db0200f2db020068dc020094dc020028020400dcd704008cd80400
+    m_ExpandedIDs: 8efafefff817ffff5840ffff64fafffff4faffff00000000d43600006e370000e6370000f4370000543800007e3800002a3900002c3a0000403a0000783a00005e3b0000ec3b0000fe3b0000743c00007e3c0000aa3c0000ce3c0000d63c0000f03c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -420,14 +420,14 @@ MonoBehaviour:
     height: 440
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 7658.628788623441
+  lastFramingTime: 2000.7010538806705
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.8218284, y: -3.9890497, z: -0.70688367}
+    m_Target: {x: 2.168374, y: 1.0446949, z: 2.1361563}
     speed: 2
-    m_Value: {x: 2.8218284, y: -3.9890497, z: -0.70688367}
+    m_Value: {x: 2.168374, y: 1.0446949, z: 2.1361563}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -455,13 +455,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.27299622, y: -0.62442935, z: 0.24752353, w: -0.68868953}
+    m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
     speed: 2
-    m_Value: {x: 0.27299622, y: 0.6244294, z: -0.24752353, w: 0.68868953}
+    m_Value: {x: -0.7071068, y: 0, z: -0, w: -0.7071068}
   m_Size:
-    m_Target: 17.6201
+    m_Target: 13.942871
     speed: 2
-    m_Value: 17.6201
+    m_Value: 13.942871
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -662,20 +662,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Code
+    - Assets/Animation_controllers
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Code
+  - Assets/Animation_controllers
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Projektai\GitHub\Bomberman\Bomberman
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ac2f0000
-    m_LastClickedID: 12204
-    m_ExpandedIDs: 00000000ac2e0000162f00001a2f0000de2f00009c300000ce310000e6310000ac340000b0340000
+    scrollPos: {x: 0, y: 22.916668}
+    m_SelectedIDs: 4a300000
+    m_LastClickedID: 12362
+    m_ExpandedIDs: 00000000ae2e0000182f00001c2f0000e02f0000a4300000e0310000f8310000cc340000d0340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -703,7 +703,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ac2e0000162f00001a2f0000de2f00009c300000ce310000e6310000ac340000b0340000
+    m_ExpandedIDs: 00000000ae2e0000182f00001c2f0000e02f0000a4300000e0310000f8310000cc340000d0340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -747,7 +747,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 11}
+      m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0

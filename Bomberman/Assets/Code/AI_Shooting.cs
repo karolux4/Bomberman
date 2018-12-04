@@ -23,8 +23,9 @@ public class AI_Shooting : MonoBehaviour {
 	void Update () {
 		
 	}
-    public void Shoot()
+    public void Shoot(float distance)
     {
+        strength = distance;
         count++;
         allowed_to_throw = false;
         Vector3 pos = transform.localPosition; // getting player position

@@ -19,9 +19,9 @@ public class Power_up1 : MonoBehaviour {
             }
             else if(gameObject.tag == "Bounce_power_up")
             {
-                if (Player.GetComponent<Additional_power_ups>().bounce_limit != 10)
+                if (Player.GetComponent<Additional_power_ups>().bounce_limit != 2)
                 {
-                    Player.GetComponent<Additional_power_ups>().bounce_limit += 2;
+                    Player.GetComponent<Additional_power_ups>().bounce_limit += 1;
                 }
             }
             else if(gameObject.tag == "Speed_power_up")
@@ -39,7 +39,12 @@ public class Power_up1 : MonoBehaviour {
             {
                 Player.GetComponent<Additional_power_ups>().bomb_kick = true;
             }
-            Destroy(this.gameObject);
+
+            foreach(Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+            this.gameObject.GetComponent<BoxCollider>().enabled = false;
         }
         if (other.tag =="Player")
         {

@@ -7,7 +7,7 @@ public class Death_physics : MonoBehaviour {
     public GameObject Death_Menu;
 	// Update is called once per frame
 	void Update () {
-		if((gameObject.tag=="Player"&&gameObject.GetComponent<Additional_power_ups>().lifes_count==0)&&(!Death_Menu.activeInHierarchy))
+		if((gameObject.tag=="Player"&&gameObject.GetComponent<Additional_power_ups>().lifes_count<=0)&&(!Death_Menu.activeInHierarchy))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -15,7 +15,7 @@ public class Death_physics : MonoBehaviour {
             Death_Menu.SetActive(true);
             this.gameObject.SetActive(false);
         }
-        else if(gameObject.tag=="AI"&&gameObject.GetComponent<Additional_power_ups>().lifes_count==0)
+        else if(gameObject.tag=="AI"&&gameObject.GetComponent<Additional_power_ups>().lifes_count<=0)
         {
             this.gameObject.SetActive(false);
         }

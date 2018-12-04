@@ -15,9 +15,10 @@ public class AI_Movement : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Throw_Bomb(moving_direction) && gameObject.GetComponent<AI_Shooting>().allowed_to_throw && gameObject.GetComponent<AI_Shooting>().count < gameObject.GetComponent<Additional_power_ups>().limit)
+        float distance;
+        if (Throw_Bomb(moving_direction, out distance) && gameObject.GetComponent<AI_Shooting>().allowed_to_throw && (gameObject.GetComponent<AI_Shooting>().count < gameObject.GetComponent<Additional_power_ups>().limit))
         {
-            gameObject.GetComponent<AI_Shooting>().Shoot();
+            gameObject.GetComponent<AI_Shooting>().Shoot(distance);
             DirectionChange(moving_direction);
         }
         else if (covered_distance > 1)
@@ -86,9 +87,10 @@ public class AI_Movement : MonoBehaviour {
             posZ = Mathf.Sign(pos.z) * ((int)Mathf.Abs(pos.z) + 0.5f);
         }
     }
-    private bool Throw_Bomb(string moving_direction)
+    private bool Throw_Bomb(string moving_direction, out float distance)
     {
         RaycastHit Hit;
+        distance = 0;
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
         List<string> Directions = new List<string>();
         Directions.Add("Front");
@@ -101,15 +103,17 @@ public class AI_Movement : MonoBehaviour {
             {
                 if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), Quaternion.Euler(0,90*i,0)*Vector3.forward, out Hit, Mathf.Infinity, layer_mask))
                 {
-                    if (Hit.distance >= 1 && Hit.distance <= 2 && Hit.collider.GetComponentInParent<BoxCollider>() == null)
+                    if (Hit.distance >= 1 && Hit.distance <= 3 && Hit.collider.GetComponentInParent<BoxCollider>() == null)
                     {
                         if (Hit.collider.tag == "Player" || Hit.collider.tag == "AI")
                         {
+                            distance = Hit.distance;
                             return true;
                         }
                     }
                     else if (Hit.distance >= 1 && Hit.distance <= 2 && Hit.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
                     {
+                        distance = Hit.distance;
                         return true;
                     }
                     else if (Hit.distance >= 1)
@@ -130,8 +134,9 @@ public class AI_Movement : MonoBehaviour {
                                 bomb_position = transform.position + new Vector3(-1f, -0.5f, 0f);
                                 break;
                         }
-                        if (IsThereDestroyableObject(moving_direction, bomb_position))
+                        if (IsThereDestroyableObject(moving_direction, bomb_position, ref distance))
                         {
+                            distance = Hit.distance;
                             return true;
                         }
                     }
@@ -186,7 +191,7 @@ public class AI_Movement : MonoBehaviour {
         }
         return available_directions;
     }
-    private bool IsThereDestroyableObject(string moving_direction, Vector3 bomb_position)
+    private bool IsThereDestroyableObject(string moving_direction, Vector3 bomb_position, ref float distance)
     {
         RaycastHit Hit;
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
@@ -205,6 +210,7 @@ public class AI_Movement : MonoBehaviour {
                     {
                         if (Hit.distance <= 1 && Hit.collider.tag == "Player" || Hit.collider.tag == "AI")
                         {
+                            distance = Hit.distance;
                             return true;
                         }
                         if (Hit.distance <= 2 && Hit.collider.tag == "Bombs")
@@ -214,6 +220,7 @@ public class AI_Movement : MonoBehaviour {
                     }
                     else if (Hit.distance <= 1 && Hit.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
                     {
+                        distance = Hit.distance;
                         return true;
                     }
                 }
