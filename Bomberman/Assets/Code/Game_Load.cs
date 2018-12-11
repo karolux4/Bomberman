@@ -8,9 +8,12 @@ public class Game_Load : MonoBehaviour {
     public GameObject Player;
     public Sprite Heart;
     private int existing_hearts;
+    public GameObject UI;
     public GameObject Damage;
-	// Use this for initialization
-	void Start () {
+    public GameObject Win_Menu;
+    public int ActiveAICount;
+    // Use this for initialization
+    void Start () {
         Time.timeScale = 1;
         existing_hearts = Player.GetComponent<Additional_power_ups>().lifes_count;
         for (int i = 0; i <existing_hearts;i++)
@@ -58,6 +61,14 @@ public class Game_Load : MonoBehaviour {
             }
             existing_hearts = Player.GetComponent<Additional_power_ups>().lifes_count;
             StartCoroutine(DamageWait());
+        }
+
+        if (ActiveAICount <= 0)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            UI.SetActive(false);
+            Win_Menu.SetActive(true);
         }
     }
     private IEnumerator DamageWait()

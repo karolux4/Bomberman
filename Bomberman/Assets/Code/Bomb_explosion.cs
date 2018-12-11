@@ -26,7 +26,7 @@ public class Bomb_explosion : MonoBehaviour {
         child.tag = "Bombs";
         child.name = "Bomb";
         yield return new WaitForSeconds(1);
-        if (creator.name == "Player")
+        if (creator.tag == "Player")
         {
             creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
         }
@@ -36,7 +36,7 @@ public class Bomb_explosion : MonoBehaviour {
         }
         yield return new WaitForSeconds(2);
         Explode("No");
-        if (creator.name == "Player")
+        if (creator.tag == "Player")
         {
             creator.GetComponent<Shooting_physics>().count--;
         }
@@ -173,7 +173,7 @@ public class Bomb_explosion : MonoBehaviour {
     private void InitialPositionCollision(float posX, float posZ, ref List<GameObject> hit_players) // needs fix
     {
         RaycastHit hit;
-        Vector3 position = new Vector3(posX, 1.5f, posZ);
+        Vector3 position = new Vector3(posX, 1.1f, posZ);
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
         for (int i=0;i<8;i++)
         {

@@ -30,7 +30,7 @@ public class AI_Shooting : MonoBehaviour {
         strength = distance;
         count++;
         allowed_to_throw = false;
-        Vector3 pos = transform.localPosition; // getting player position
+        Vector3 pos = transform.localPosition+new Vector3(0f,0.5f,0f); // getting player position
         switch (gameObject.GetComponent<AI_Movement>().moving_direction)
         {
             case "Front":

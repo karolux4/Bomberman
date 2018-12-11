@@ -100,7 +100,7 @@ public class Bomb_spawn_collision : MonoBehaviour {
         if (collided)
         {
             Destroy(this.gameObject);
-            if (creator.name == "Player")
+            if (creator.tag == "Player")
             {
                 creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
                 if (creator.GetComponent<Shooting_physics>().count > 0)

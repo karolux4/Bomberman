@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AI_Movement : MonoBehaviour {
-    public Rigidbody rb;
+    private Animator animator;
     public string moving_direction;
     private string second_prev_direction = "";
     private float covered_distance = 0;
@@ -27,24 +27,41 @@ public class AI_Movement : MonoBehaviour {
         }
         CheckForBombs();
         float x = 0,  z = 0;
-		switch(moving_direction)
+        Transform Armature = this.gameObject.transform.GetChild(0);
+        switch (moving_direction)
         {
             case "Front":
+                Armature.gameObject.transform.eulerAngles = new Vector3(Armature.gameObject.transform.eulerAngles.x, 0, 0);
                 z = Time.deltaTime* gameObject.GetComponent<Additional_power_ups>().speed; //speed
                 break;
             case "Back":
+                Armature.gameObject.transform.eulerAngles = new Vector3(Armature.gameObject.transform.eulerAngles.x, 180, 0);
                 z = -Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
                 break;
             case "Left":
+                Armature.gameObject.transform.eulerAngles = new Vector3(Armature.gameObject.transform.eulerAngles.x, 270, 0);
                 x = -Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
                 break;
             case "Right":
+                Armature.gameObject.transform.eulerAngles = new Vector3(Armature.gameObject.transform.eulerAngles.x, 90, 0);
                 x = Time.deltaTime * gameObject.GetComponent<Additional_power_ups>().speed;
                 break;
         }
         covered_distance += x + z;
         transform.Translate(x, 0, z);
-	}
+
+        animator = this.gameObject.GetComponent<Animator>();
+        if (moving_direction!="")
+        {
+            animator.SetTrigger("Walking");
+            animator.ResetTrigger("Standing");
+        }
+        else
+        {
+            animator.SetTrigger("Standing");
+            animator.ResetTrigger("Walking");
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Player")
@@ -52,7 +69,7 @@ public class AI_Movement : MonoBehaviour {
             float posX, posZ;
             CenterPosition(gameObject, out posX, out posZ);
 
-            transform.localPosition = new Vector3(posX, 1.72f, posZ);
+            transform.localPosition = new Vector3(posX, 1f, posZ);
         }
         List<string> available_directions = AvailableDirections(second_prev_direction);
         second_prev_direction = moving_direction;
@@ -101,17 +118,17 @@ public class AI_Movement : MonoBehaviour {
         {
             if (moving_direction == Directions[i])
             {
-                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), Quaternion.Euler(0,90*i,0)*Vector3.forward, out Hit, Mathf.Infinity, layer_mask))
+                if (Physics.Raycast(transform.position + new Vector3(0f, 0.3f, 0f), Quaternion.Euler(0,90*i,0)*Vector3.forward, out Hit, Mathf.Infinity, layer_mask))
                 {
                     if (Hit.distance >= 1 && Hit.distance <= 3 && Hit.collider.GetComponentInParent<BoxCollider>() == null)
                     {
-                        if (Hit.collider.tag == "Player" || Hit.collider.tag == "AI")
+                        if ((Hit.collider.tag == "Player" || Hit.collider.tag == "AI")&&(AvailableDirections("").Count>1))
                         {
                             distance = Hit.distance;
                             return true;
                         }
                     }
-                    else if (Hit.distance >= 1 && Hit.distance <= 2 && Hit.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")
+                    else if ((Hit.distance >= 1 && Hit.distance <= 2 && Hit.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")&& (AvailableDirections("").Count > 1))
                     {
                         distance = Hit.distance;
                         return true;
@@ -122,19 +139,19 @@ public class AI_Movement : MonoBehaviour {
                         switch(i)
                         {
                             case 0:
-                                bomb_position = transform.position + new Vector3(0f, -0.5f, 1f);
+                                bomb_position = transform.position + new Vector3(0f, 0.3f, 1f);
                                 break;
                             case 1:
-                                bomb_position = transform.position + new Vector3(1f, -0.5f, 0f);
+                                bomb_position = transform.position + new Vector3(1f, 0.3f, 0f);
                                 break;
                             case 2:
-                                bomb_position = transform.position + new Vector3(0f, -0.5f, -1f);
+                                bomb_position = transform.position + new Vector3(0f, 0.3f, -1f);
                                 break;
                             case 3:
-                                bomb_position = transform.position + new Vector3(-1f, -0.5f, 0f);
+                                bomb_position = transform.position + new Vector3(-1f, 0.3f, 0f);
                                 break;
                         }
-                        if (IsThereDestroyableObject(moving_direction, bomb_position, ref distance))
+                        if (IsThereDestroyableObject(moving_direction, bomb_position, ref distance) && (AvailableDirections("").Count > 1))
                         {
                             distance = Hit.distance;
                             return true;
@@ -152,7 +169,7 @@ public class AI_Movement : MonoBehaviour {
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
         /* Vector3 AI_back_position, AI_front_position;
          PositionCenter(out AI_back_position,out AI_front_position);//transform.position - new Vector3(0f, 0.5f, 0f);// PositionCenter();*/
-        Vector3 AI_position = transform.position - new Vector3(0f, 0.5f, 0f);
+        Vector3 AI_position = transform.position + new Vector3(0f, 0.3f, 0f);
         if (Physics.SphereCast(AI_position,0.3f,transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
         {
             if((Front.distance>0.4)&&(Front.collider.gameObject.layer!=11))
@@ -289,36 +306,36 @@ public class AI_Movement : MonoBehaviour {
         switch (moving_direction)
         {
             case "Front":
-                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.forward), out Front, Mathf.Infinity, layer_mask))
+                if (Physics.Raycast(transform.position + new Vector3(0f, 0.3f, 0f), transform.TransformDirection(Vector3.forward), out Front, Mathf.Infinity, layer_mask))
                 {
-                    if(Front.collider.tag=="Bombs")
+                    if(Front.collider.tag=="Bombs"&&Front.distance<3)
                     {
                         DirectionChange(moving_direction);
                     }
                 }
                     break;
             case "Back":
-                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
+                if (Physics.Raycast(transform.position + new Vector3(0f, 0.3f, 0f), transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
                 {
-                    if(Back.collider.tag=="Bombs")
+                    if(Back.collider.tag=="Bombs" && Back.distance < 3)
                     {
                         DirectionChange(moving_direction);
                     }
                 }
                 break;
             case "Left":
-                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
+                if (Physics.Raycast(transform.position + new Vector3(0f, 0.3f, 0f), transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
                 {
-                    if (Left.collider.tag == "Bombs")
+                    if (Left.collider.tag == "Bombs" && Left.distance < 3)
                     {
                         DirectionChange(moving_direction);
                     }
                 }
                 break;
             case "Right":
-                if (Physics.Raycast(transform.position - new Vector3(0f, 0.5f, 0f), transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
+                if (Physics.Raycast(transform.position + new Vector3(0f, 0.3f, 0f), transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
                 {
-                    if (Right.collider.tag == "Bombs")
+                    if (Right.collider.tag == "Bombs" && Right.distance < 3)
                     {
                         DirectionChange(moving_direction);
                     }

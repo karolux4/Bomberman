@@ -10,7 +10,15 @@ public class Main_menu : MonoBehaviour {
     public AudioMixer mixer;
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);
+    }
+    public void P2_Multiplayer()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void P4_Multiplayer()
+    {
+        SceneManager.LoadScene(3);
     }
     public void Exit()
     {

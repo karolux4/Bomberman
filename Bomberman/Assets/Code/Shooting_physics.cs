@@ -16,6 +16,7 @@ public class Shooting_physics : MonoBehaviour {
     public float bomb_collision_radius;
     public AudioClip explosion;
     public AudioMixerGroup mixer;
+    public string Shoot_button;
     private void Start()
     {
         count = 0;
@@ -24,7 +25,7 @@ public class Shooting_physics : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        bool pressed = Input.GetKey(KeyCode.Space); //checking if player wants to shoot
+        bool pressed = Input.GetButtonDown(Shoot_button); //checking if player wants to shoot
         if (pressed && count < gameObject.GetComponent<Additional_power_ups>().limit && allowed_to_throw)
         {
             allowed_to_throw = false;
@@ -34,7 +35,7 @@ public class Shooting_physics : MonoBehaviour {
 	}
     void Shoot()
     {
-        Vector3 pos = player.GetComponent<Transform>().localPosition; // getting player position
+        Vector3 pos = player.GetComponent<Transform>().localPosition+new Vector3(0f,0.5f,0f); // getting player position
         pos += transform.forward;
         bomb.GetComponent<Transform>().localPosition = pos; // changing bomb location
         GameObject player_bomb= Instantiate(bomb); // creating bomb in the scene
