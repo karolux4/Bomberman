@@ -61,17 +61,44 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Player_Code\Additional_power_ups.cs" />
-    <Compile Include="Assets\Player_Code\AI_Movement.cs" />
-    <Compile Include="Assets\Player_Code\AI_Shooting.cs" />
-    <Compile Include="Assets\Player_Code\Bomb_explosion.cs" />
-    <Compile Include="Assets\Player_Code\Bomb_height_bug_fix.cs" />
-    <Compile Include="Assets\Player_Code\Bomb_spawn_collision.cs" />
-    <Compile Include="Assets\Player_Code\CameraRotation.cs" />
-    <Compile Include="Assets\Player_Code\Death_physics.cs" />
-    <Compile Include="Assets\Player_Code\Movement_physics.cs" />
-    <Compile Include="Assets\Player_Code\Power_up1.cs" />
-    <Compile Include="Assets\Player_Code\Shooting_physics.cs" />
+    <Compile Include="Assets\Code\Additional_power_ups.cs" />
+    <Compile Include="Assets\Code\AI_Movement.cs" />
+    <Compile Include="Assets\Code\AI_Shooting.cs" />
+    <Compile Include="Assets\Code\AudioDestroy.cs" />
+    <Compile Include="Assets\Code\AudioSlider.cs" />
+    <Compile Include="Assets\Code\Bomb_explosion.cs" />
+    <Compile Include="Assets\Code\Bomb_height_bug_fix.cs" />
+    <Compile Include="Assets\Code\Bomb_spawn_collision.cs" />
+    <Compile Include="Assets\Code\CameraRotation.cs" />
+    <Compile Include="Assets\Code\Death_physics.cs" />
+    <Compile Include="Assets\Code\Game_Load.cs" />
+    <Compile Include="Assets\Code\Main_menu.cs" />
+    <Compile Include="Assets\Code\Movement_physics.cs" />
+    <Compile Include="Assets\Code\Multiplayer_Game_Load.cs" />
+    <Compile Include="Assets\Code\Power_up_randomizer.cs" />
+    <Compile Include="Assets\Code\Power_up1.cs" />
+    <Compile Include="Assets\Code\Shooting_physics.cs" />
+    <Compile Include="Assets\Code\UI_Menu.cs" />
+    <Compile Include="Assets\Code\UI_Power_Ups.cs" />
+    <Compile Include="Assets\Code\You_Died_Animation.cs" />
+    <Compile Include="Assets\Code\You_Win_Animation.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Cinemachine">
       <HintPath>D:/Projektai/GitHub/Bomberman/Bomberman/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>

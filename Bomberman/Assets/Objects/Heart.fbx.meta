@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 36f0229946b46c349af3a06554bcee13
+guid: faa6bfe0b36aef14f9680b90f15302fa
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -13,13 +13,18 @@ ModelImporter:
     400004: Bone_end
     400006: //RootNode
     400008: SurfSphere
-    2100000: No Name
+    2100000: Heart
     4300000: SurfSphere
     7400000: Animation
     7400002: Armature|Animation
     9500000: //RootNode
     13700000: SurfSphere
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Heart
+    second: {fileID: 2100000, guid: 5b0dad4db29a4fd49afb203470318db3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -126,7 +131,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
+    previousCalculatedGlobalScale: 0.005
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
