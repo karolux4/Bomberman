@@ -172,28 +172,28 @@ public class AI_Movement : MonoBehaviour {
         Vector3 AI_position = transform.position + new Vector3(0f, 0.3f, 0f);
         if (Physics.SphereCast(AI_position,0.3f,transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
         {
-            if((Front.distance>0.4)&&(Front.collider.gameObject.layer!=11))
+            if((Front.distance>0.6f)&&(Front.collider.gameObject.layer!=11))
             {
                 available_directions.Add("Front");
             }
         }
         if (Physics.SphereCast(AI_position,0.3f, transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
         {
-            if (Back.distance > 0.4&&(Back.collider.gameObject.layer != 11))
+            if (Back.distance > 0.6f&&(Back.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Back");
             }
         }
         if (Physics.SphereCast(AI_position,0.3f, transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
         {
-            if (Left.distance > 0.4 && (Left.collider.gameObject.layer != 11))
+            if (Left.distance > 0.6f && (Left.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Left");
             }
         }
         if (Physics.SphereCast(AI_position,0.3f, transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
         {
-            if (Right.distance > 0.4 && (Right.collider.gameObject.layer != 11))
+            if (Right.distance > 0.6f && (Right.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Right");
             }

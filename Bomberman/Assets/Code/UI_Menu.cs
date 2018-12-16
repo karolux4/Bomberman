@@ -13,6 +13,7 @@ public class UI_Menu : MonoBehaviour {
     public void Quit()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
     public void Restart()
     {

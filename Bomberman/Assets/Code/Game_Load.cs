@@ -12,6 +12,8 @@ public class Game_Load : MonoBehaviour {
     public GameObject Damage;
     public GameObject Win_Menu;
     public int ActiveAICount;
+    public AudioSource Background;
+    public AudioSource Win;
     // Use this for initialization
     void Start () {
         Time.timeScale = 1;
@@ -69,6 +71,8 @@ public class Game_Load : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
             UI.SetActive(false);
             Win_Menu.SetActive(true);
+            Background.Stop();
+            Win.Play();
         }
     }
     private IEnumerator DamageWait()

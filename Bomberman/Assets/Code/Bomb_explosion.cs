@@ -25,7 +25,7 @@ public class Bomb_explosion : MonoBehaviour {
         child.layer = 11;
         child.tag = "Bombs";
         child.name = "Bomb";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         if (creator.tag == "Player")
         {
             creator.GetComponent<Shooting_physics>().allowed_to_throw = true;
@@ -34,7 +34,7 @@ public class Bomb_explosion : MonoBehaviour {
         {
             creator.GetComponent<AI_Shooting>().allowed_to_throw = true;
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(creator.GetComponent<Additional_power_ups>().explosion_time);
         Explode("No");
         if (creator.tag == "Player")
         {
@@ -134,7 +134,12 @@ public class Bomb_explosion : MonoBehaviour {
                 }
                 if ((distance1 < exploding_power) && ((Hit.collider.tag == "Player") || (Hit.collider.tag == "AI")))
                 {
-                    Hit.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                    if (!Hit.collider.gameObject.GetComponent<Additional_power_ups>().invincible)
+                    {
+                        Hit.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                        Hit.collider.gameObject.GetComponent<Additional_power_ups>().invincible = true;
+                        Hit.collider.gameObject.GetComponent<Additional_power_ups>().Hit();
+                    }
                     hit_players.Add(Hit.collider.gameObject);
                     ExplosionRays(Hit.collider.gameObject, exploding_power - distance1,ref i, hit_players);
                 }
@@ -173,17 +178,22 @@ public class Bomb_explosion : MonoBehaviour {
     private void InitialPositionCollision(float posX, float posZ, ref List<GameObject> hit_players) // needs fix
     {
         RaycastHit hit;
-        Vector3 position = new Vector3(posX, 1.1f, posZ);
+        Vector3 position = new Vector3(posX, 1.2f, posZ);
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
         for (int i=0;i<8;i++)
         {
-            if (Physics.Raycast(position, Quaternion.Euler(0, i * 45, 0) * transform.forward, out hit, 0.5f, layer_mask))
+            if (Physics.Raycast(position, Quaternion.Euler(0, i * 45, 0) * transform.forward, out hit, 0.6f, layer_mask))
             {
                 if(hit.collider.tag=="Player"||hit.collider.tag=="AI")
                 {
                     if (!hit_players.Contains(hit.collider.gameObject))
                     {
-                        hit.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                        if (!hit.collider.gameObject.GetComponent<Additional_power_ups>().invincible)
+                        {
+                            hit.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                            hit.collider.gameObject.GetComponent<Additional_power_ups>().invincible = true;
+                            hit.collider.gameObject.GetComponent<Additional_power_ups>().Hit();
+                        }
                         hit_players.Add(hit.collider.gameObject);
                     }
                 }

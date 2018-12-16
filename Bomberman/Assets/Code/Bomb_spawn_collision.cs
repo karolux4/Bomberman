@@ -78,7 +78,7 @@ public class Bomb_spawn_collision : MonoBehaviour {
                             break;
                     }
                 }
-                gameObject.GetComponent<Rigidbody>().AddForce(direction * 10f, ForceMode.Impulse);
+                gameObject.GetComponent<Rigidbody>().AddForce(direction * 5f, ForceMode.Impulse);
                 gameObject.GetComponent<SphereCollider>().material = null;
                 kicked = true;
             }

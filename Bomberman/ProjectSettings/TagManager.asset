@@ -15,6 +15,7 @@ TagManager:
   - Bomb_kick_power_up
   - AI
   - Bombs
+  - Sensitivity
   layers:
   - Default
   - TransparentFX

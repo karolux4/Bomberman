@@ -71,12 +71,16 @@
     <Compile Include="Assets\Code\Bomb_spawn_collision.cs" />
     <Compile Include="Assets\Code\CameraRotation.cs" />
     <Compile Include="Assets\Code\Death_physics.cs" />
+    <Compile Include="Assets\Code\Exit_credits.cs" />
     <Compile Include="Assets\Code\Game_Load.cs" />
     <Compile Include="Assets\Code\Main_menu.cs" />
+    <Compile Include="Assets\Code\Map_Randomizer.cs" />
+    <Compile Include="Assets\Code\Menu_Sensitivity_Destroy.cs" />
     <Compile Include="Assets\Code\Movement_physics.cs" />
     <Compile Include="Assets\Code\Multiplayer_Game_Load.cs" />
     <Compile Include="Assets\Code\Power_up_randomizer.cs" />
     <Compile Include="Assets\Code\Power_up1.cs" />
+    <Compile Include="Assets\Code\Sensitivity_Value.cs" />
     <Compile Include="Assets\Code\Shooting_physics.cs" />
     <Compile Include="Assets\Code\UI_Menu.cs" />
     <Compile Include="Assets\Code\UI_Power_Ups.cs" />

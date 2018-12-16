@@ -24,7 +24,19 @@ public class AudioSlider : MonoBehaviour {
         {
             mixer.GetFloat("musicVol", out vol);
         }
-       slider.value = Mathf.Pow(10,(float)vol/(float)20);
+       else if(slider.name=="Sensitivity")
+        {
+            vol = GameObject.Find("Sensitivity").GetComponent<Sensitivity_Value>().Sensitivity;
+        }
+
+        if (slider.name != "Sensitivity")
+        {
+            slider.value = Mathf.Pow(10, (float)vol / (float)20);
+        }
+        else
+        {
+            slider.value = (float)vol / (float)6;
+        }
     }
     public void Update()
     {

@@ -10,7 +10,7 @@ public class Multiplayer_Game_Load : MonoBehaviour {
     public GameObject Player3;
     public GameObject Player4;
     public Sprite Heart;
-    private int existing_hearts;
+    public int existing_hearts;
     public GameObject UI;
     public GameObject Win_Menu;
     public List<GameObject> Players;
@@ -77,7 +77,7 @@ public class Multiplayer_Game_Load : MonoBehaviour {
             else if (Hearts[i] > Players[i].GetComponent<Additional_power_ups>().lifes_count)
             {
                 RectTransform rec = this.gameObject.transform.Find("Canvas_P" + (i + 1)).GetComponentInChildren<Image>(true).rectTransform;
-                rec.sizeDelta = new Vector2(1920, (((float)1920 / (float)Screen.width) * Screen.height/2));
+                rec.sizeDelta = new Vector2(3840/Players.Count, (((float)1920 / (float)Screen.width) * Screen.height/2));
                 this.gameObject.transform.Find("Canvas_P" + (i + 1)).GetComponentInChildren<Image>(true).gameObject.SetActive(true);
                 for (int j = Hearts[i]; j > Players[i].GetComponent<Additional_power_ups>().lifes_count; j--)
                 {

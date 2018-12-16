@@ -36,7 +36,7 @@ public class Shooting_physics : MonoBehaviour {
     void Shoot()
     {
         Vector3 pos = player.GetComponent<Transform>().localPosition+new Vector3(0f,0.5f,0f); // getting player position
-        pos += transform.forward;
+        pos += transform.forward*0.5f;
         bomb.GetComponent<Transform>().localPosition = pos; // changing bomb location
         GameObject player_bomb= Instantiate(bomb); // creating bomb in the scene
         player_bomb.name = player.name + "_bomb_"+count; // renaming bomb

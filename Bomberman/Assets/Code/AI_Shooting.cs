@@ -27,8 +27,9 @@ public class AI_Shooting : MonoBehaviour {
 	}
     public void Shoot(float distance)
     {
-        strength = distance;
+        int k = ((int)(this.gameObject.GetComponent<Additional_power_ups>().bounce_limit + 1) / (int)2)+1;
         count++;
+        strength = (float)distance / (float)k;
         allowed_to_throw = false;
         Vector3 pos = transform.localPosition+new Vector3(0f,0.5f,0f); // getting player position
         switch (gameObject.GetComponent<AI_Movement>().moving_direction)

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraRotation : MonoBehaviour {
 
-    Vector2 prev_mouse_pos;
+    public Vector2 prev_mouse_pos;
     Vector2 smooth;
-    public float sensitivity = 5.0f;
+    public float sensitivity=4f;
     public float smoothing = 2.0f;
     GameObject player;
     public string MouseX;
@@ -15,12 +15,14 @@ public class CameraRotation : MonoBehaviour {
 	void Start ()
     {
         player = this.transform.parent.gameObject;
+        prev_mouse_pos = new Vector2(player.transform.eulerAngles.y, 0);
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (Time.timeScale != 0)
+        sensitivity = GameObject.Find("Sensitivity").GetComponent<Sensitivity_Value>().Sensitivity;
+        if ((Time.timeScale != 0)&&(this.gameObject.transform.localPosition.y<3))
         {
             var mouse_delta = new Vector2(Input.GetAxisRaw(MouseX), Input.GetAxisRaw(MouseY));
             mouse_delta = Vector2.Scale(mouse_delta, new Vector2(sensitivity * smoothing, sensitivity * smoothing));

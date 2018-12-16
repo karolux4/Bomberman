@@ -40,4 +40,8 @@ public class Main_menu : MonoBehaviour {
     {
         mixer.SetFloat("musicVol", Mathf.Log10(slider_value) * 20);
     }
+    public void Sensitivity(float slider_value)
+    {
+        GameObject.Find("Sensitivity").GetComponent<Sensitivity_Value>().Sensitivity = slider_value * 6;
+    }
 }
