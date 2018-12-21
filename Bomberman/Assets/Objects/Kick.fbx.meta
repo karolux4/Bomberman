@@ -18,12 +18,18 @@ ModelImporter:
     400010: Foot_end
     400012: //RootNode
     2100000: No Name
+    2100002: Material
     4300000: Cube
     7400000: Normal
     7400002: Armature|Normal
     9500000: //RootNode
     13700000: Cube
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 939c18799e8f38e4190d1e6a34836d75, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

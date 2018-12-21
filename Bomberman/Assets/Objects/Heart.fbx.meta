@@ -8,11 +8,15 @@ ModelImporter:
     100004: Bone_end
     100006: //RootNode
     100008: SurfSphere
+    100010: HeartBone
+    100012: HeartBone_end
     400000: Armature
     400002: Bone
     400004: Bone_end
     400006: //RootNode
     400008: SurfSphere
+    400010: HeartBone
+    400012: HeartBone_end
     2100000: Heart
     4300000: SurfSphere
     7400000: Animation

@@ -14,11 +14,17 @@ ModelImporter:
     400006: Boots_end
     400008: Cube.001
     2100000: No Name
+    2100002: Material.001
     4300000: Cube.001
     7400000: Armature|ArmatureAction
     9500000: //RootNode
     13700000: Cube.001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: c69d6753fd0ebd94698484d1b6f5788d, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

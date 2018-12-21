@@ -14,6 +14,14 @@ ModelImporter:
     100016: Middle Ball_end
     100018: Right Ball
     100020: Right Ball_end
+    100022: Bone
+    100024: Bone.001
+    100026: Bone.001_end
+    100028: Bone.002
+    100030: Bone.002_end
+    100032: Bone.003
+    100034: Bone.003_end
+    100036: Bone_end
     400000: Armature
     400002: Big_Circle
     400004: Big_Circle_end
@@ -25,12 +33,26 @@ ModelImporter:
     400016: Middle Ball_end
     400018: Right Ball
     400020: Right Ball_end
+    400022: Bone
+    400024: Bone.001
+    400026: Bone.001_end
+    400028: Bone.002
+    400030: Bone.002_end
+    400032: Bone.003
+    400034: Bone.003_end
+    400036: Bone_end
     2100000: No Name
+    2100002: Material
     4300000: Circle
     7400000: Armature|Animation
     9500000: //RootNode
     13700000: Circle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 2fe4e917178db5342bcfa9de448ddf7e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
