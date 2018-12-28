@@ -27,9 +27,13 @@ public class AI_Shooting : MonoBehaviour {
 	}
     public void Shoot(float distance)
     {
-        int k = ((int)(this.gameObject.GetComponent<Additional_power_ups>().bounce_limit + 1) / (int)2)+1;
+        int k = this.gameObject.GetComponent<Additional_power_ups>().bounce_limit * 2;
+        if(k==0)
+        {
+            k = 1;
+        }
         count++;
-        strength = (float)distance / (float)k;
+        strength = (float)(distance-1f)/(float)(k);//distance;
         allowed_to_throw = false;
         Vector3 pos = transform.localPosition+new Vector3(0f,0.5f,0f); // getting player position
         switch (gameObject.GetComponent<AI_Movement>().moving_direction)
@@ -48,6 +52,21 @@ public class AI_Shooting : MonoBehaviour {
                 break;
         }
         bomb.GetComponent<Transform>().localPosition = pos; // changing bomb location
+        switch (gameObject.GetComponent<AI_Movement>().moving_direction)
+        {
+            case "Front":
+                pos += transform.forward * 0.7f;
+                break;
+            case "Back":
+                pos += -transform.forward * 0.7f;
+                break;
+            case "Left":
+                pos += -transform.right * 0.7f;
+                break;
+            case "Right":
+                pos += transform.right * 0.7f;
+                break;
+        }
         GameObject AI_bomb = Instantiate(bomb); // creating bomb in the scene
         AI_bomb.name = transform.name + "_bomb_" + count; // renaming bomb
         AI_bomb.layer = 12;
@@ -69,7 +88,7 @@ public class AI_Shooting : MonoBehaviour {
                 break;
             case "Left":
                 rb.AddForce(-transform.right * strength, ForceMode.Impulse);
-                break;
+                break;  
             case "Right":
                 rb.AddForce(transform.right * strength, ForceMode.Impulse);
                 break;

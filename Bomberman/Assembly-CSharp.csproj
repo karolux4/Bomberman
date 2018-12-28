@@ -76,6 +76,7 @@
     <Compile Include="Assets\Code\Menu\Exit_credits.cs" />
     <Compile Include="Assets\Code\Menu\Main_menu.cs" />
     <Compile Include="Assets\Code\Menu\Menu_Sensitivity_Destroy.cs" />
+    <Compile Include="Assets\Code\Menu\SelectOnInput.cs" />
     <Compile Include="Assets\Code\Menu\Sensitivity_Value.cs" />
     <Compile Include="Assets\Code\Player\CameraRotation.cs" />
     <Compile Include="Assets\Code\Player\Death_physics.cs" />

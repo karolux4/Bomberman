@@ -35,7 +35,7 @@ public class AudioSlider : MonoBehaviour {
         }
         else
         {
-            slider.value = (float)vol / (float)6;
+            slider.value = ((float)vol-1) / (float)4;
         }
     }
     public void Update()

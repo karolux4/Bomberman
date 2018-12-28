@@ -6,8 +6,8 @@ public class CameraRotation : MonoBehaviour {
 
     public Vector2 prev_mouse_pos;
     Vector2 smooth;
-    public float sensitivity=4f;
-    public float smoothing = 2.0f;
+    public float sensitivity;
+    public float smoothing;
     GameObject player;
     public string MouseX;
     public string MouseY;

@@ -29,9 +29,6 @@ public class Map_Ending : MonoBehaviour {
 
     IEnumerator Map_End(float positionX, float positionZ, int signX, int signZ) // Box drop coordinates
     {
-        Game_End_Box.transform.localPosition = new Vector3(positionX, 3f, positionZ);
-        GameObject box = Instantiate(Game_End_Box);
-        Place_Destroy(box);
         if(!game_type)
         {
             if(Game_Load.GetComponent<Game_Load>().ActiveAICount==0||(!Game_Load.GetComponent<Game_Load>().Player.activeInHierarchy))
@@ -40,6 +37,9 @@ public class Map_Ending : MonoBehaviour {
             }
             else
             {
+                Game_End_Box.transform.localPosition = new Vector3(positionX, 3f, positionZ);
+                GameObject box = Instantiate(Game_End_Box);
+                Place_Destroy(box);
                 Position(ref positionX, ref positionZ, ref signX, ref signZ);
                 yield return new WaitForSeconds(1);
                 StartCoroutine(Map_End(positionX, positionZ, signX, signZ));
@@ -54,6 +54,9 @@ public class Map_Ending : MonoBehaviour {
             }
             else
             {
+                Game_End_Box.transform.localPosition = new Vector3(positionX, 3f, positionZ);
+                GameObject box = Instantiate(Game_End_Box);
+                Place_Destroy(box);
                 Position(ref positionX, ref positionZ, ref signX, ref signZ);
                 yield return new WaitForSeconds(1);
                 StartCoroutine(Map_End(positionX, positionZ, signX, signZ));

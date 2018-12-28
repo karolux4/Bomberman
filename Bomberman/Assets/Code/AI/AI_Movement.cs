@@ -122,20 +122,20 @@ public class AI_Movement : MonoBehaviour {
                 {
                     if (Hit.distance >= 1 && Hit.distance <= 3 && Hit.collider.GetComponentInParent<BoxCollider>() == null)
                     {
-                        if ((Hit.collider.tag == "Player" || Hit.collider.tag == "AI")&&(AvailableDirections("").Count>1))
+                        if ((Hit.collider.tag == "Player" || Hit.collider.tag == "AI")&&(AvailableDirections("X").Count>1))
                         {
                             distance = Hit.distance;
                             return true;
                         }
                     }
-                    else if ((Hit.distance >= 1 && Hit.distance <= 2 && Hit.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")&& (AvailableDirections("").Count > 1))
+                    else if ((Hit.distance >= 1 && Hit.distance <= 2 && Hit.collider.GetComponentInParent<BoxCollider>().tag == "Boxes")&& (AvailableDirections("X").Count > 1))
                     {
                         distance = Hit.distance;
                         return true;
                     }
                     else if (Hit.distance >= 1)
                     {
-                        Vector3 bomb_position = new Vector3();
+                        Vector3 bomb_position = new Vector3(0f,0f,0f);
                         switch(i)
                         {
                             case 0:
@@ -151,7 +151,7 @@ public class AI_Movement : MonoBehaviour {
                                 bomb_position = transform.position + new Vector3(-1f, 0.3f, 0f);
                                 break;
                         }
-                        if (IsThereDestroyableObject(moving_direction, bomb_position, ref distance) && (AvailableDirections("").Count > 1))
+                        if (IsThereDestroyableObject(moving_direction, bomb_position, ref distance) && (AvailableDirections("X").Count > 1))
                         {
                             distance = Hit.distance;
                             return true;
@@ -167,33 +167,36 @@ public class AI_Movement : MonoBehaviour {
         List<string> available_directions = new List<string>();
         RaycastHit Front, Back, Left, Right;
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
-        /* Vector3 AI_back_position, AI_front_position;
-         PositionCenter(out AI_back_position,out AI_front_position);//transform.position - new Vector3(0f, 0.5f, 0f);// PositionCenter();*/
+        float min = 0.4f;
+        if (prevDirection == "X")
+        {
+            min = 1f;
+        }
         Vector3 AI_position = transform.position + new Vector3(0f, 0.3f, 0f);
         if (Physics.SphereCast(AI_position,0.3f,transform.TransformDirection(Vector3.forward),out Front, Mathf.Infinity,layer_mask))
         {
-            if((Front.distance>0.6f)&&(Front.collider.gameObject.layer!=11))
+            if((Front.distance>min)&&(Front.collider.gameObject.layer!=11))
             {
                 available_directions.Add("Front");
             }
         }
         if (Physics.SphereCast(AI_position,0.3f, transform.TransformDirection(Vector3.back), out Back, Mathf.Infinity, layer_mask))
         {
-            if (Back.distance > 0.6f&&(Back.collider.gameObject.layer != 11))
+            if (Back.distance > min&&(Back.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Back");
             }
         }
         if (Physics.SphereCast(AI_position,0.3f, transform.TransformDirection(Vector3.left), out Left, Mathf.Infinity, layer_mask))
         {
-            if (Left.distance > 0.6f && (Left.collider.gameObject.layer != 11))
+            if (Left.distance > min && (Left.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Left");
             }
         }
         if (Physics.SphereCast(AI_position,0.3f, transform.TransformDirection(Vector3.right), out Right, Mathf.Infinity, layer_mask))
         {
-            if (Right.distance > 0.6f && (Right.collider.gameObject.layer != 11))
+            if (Right.distance > min && (Right.collider.gameObject.layer != 11))
             {
                 available_directions.Add("Right");
             }
@@ -225,7 +228,7 @@ public class AI_Movement : MonoBehaviour {
                 {
                     if (Hit.collider.GetComponentInParent<BoxCollider>() == null)
                     {
-                        if (Hit.distance <= 1 && Hit.collider.tag == "Player" || Hit.collider.tag == "AI")
+                        if (Hit.distance <= 1 && (Hit.collider.tag == "Player" || Hit.collider.tag == "AI"))
                         {
                             distance = Hit.distance;
                             return true;

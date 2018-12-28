@@ -42,6 +42,6 @@ public class Main_menu : MonoBehaviour {
     }
     public void Sensitivity(float slider_value)
     {
-        GameObject.Find("Sensitivity").GetComponent<Sensitivity_Value>().Sensitivity = slider_value * 6;
+        GameObject.Find("Sensitivity").GetComponent<Sensitivity_Value>().Sensitivity = slider_value * 4+1;
     }
 }

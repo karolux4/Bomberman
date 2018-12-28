@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement_physics : MonoBehaviour {
     public GameObject PauseMenu, UI, Stats;
+    public bool end = false;
     private Animator animator;
     public string Horizontal_Axis;
     public string Vertical_Axis;
@@ -34,19 +35,19 @@ public class Movement_physics : MonoBehaviour {
             animator.ResetTrigger("Walking");
         }
 
-        if (Input.GetKey(KeyCode.Escape)&&(!PauseMenu.activeInHierarchy))
+        if (Input.GetButton("Cancel")&&(!PauseMenu.activeInHierarchy)&&!end)
         {
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             UI.SetActive(false);
             PauseMenu.SetActive(true);
-        }
-        if(Input.GetKey(KeyCode.Tab)&&(!Stats.activeInHierarchy))
+        }   
+        if(Input.GetButton("Stats")&&(!Stats.activeInHierarchy))
         {
             Stats.SetActive(true);
         }
-        else if(!Input.GetKey(KeyCode.Tab))
+        else if(!Input.GetButton("Stats"))
         {
             Stats.SetActive(false);
         }

@@ -14,9 +14,10 @@ public class Game_Load : MonoBehaviour {
     public int ActiveAICount;
     public AudioSource Background;
     public AudioSource Win;
-    public GameObject Stats;
+    private bool started = false;
     // Use this for initialization
     void Start () {
+        started = false;
         Time.timeScale = 1;
         existing_hearts = Player.GetComponent<Additional_power_ups>().lifes_count;
         for (int i = 0; i <existing_hearts;i++)
@@ -66,14 +67,16 @@ public class Game_Load : MonoBehaviour {
             StartCoroutine(DamageWait());
         }
 
-        if (ActiveAICount <= 0)
+        if ((ActiveAICount <= 0)&&(!started))
         {
+            Player.GetComponent<Movement_physics>().end = true;
+            started = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             UI.SetActive(false);
             Win_Menu.SetActive(true);
             Background.Stop();
-            Stats.GetComponent<Stats>().Wins[0]++;
+            GameObject.Find("Stats").GetComponent<Stats>().Wins[0]++;
             Win.Play();
         }
     }

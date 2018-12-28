@@ -73,8 +73,10 @@ public class Bomb_explosion : MonoBehaviour {
         CenterPosition(gameObject,out posX,out posZ);
         explosion_vertical.GetComponent<Transform>().localPosition = new Vector3(posX, 1.5f, posZ);
         explosion_horizontal.GetComponent<Transform>().localPosition = new Vector3(posX, 1.5f, posZ);
-        explosion_vertical.GetComponent<ParticleSystem>().startSpeed = creator.GetComponent<Additional_power_ups>().bomb_power* 5f;
-        explosion_horizontal.GetComponent<ParticleSystem>().startSpeed = creator.GetComponent<Additional_power_ups>().bomb_power * 5f;
+        var main1 = explosion_vertical.GetComponent<ParticleSystem>().main;
+        main1.startSpeed = creator.GetComponent<Additional_power_ups>().bomb_power * 5f;
+        var main2 = explosion_horizontal.GetComponent<ParticleSystem>().main;
+        main2.startSpeed = creator.GetComponent<Additional_power_ups>().bomb_power * 5f;
         // vertical explosion
         Instantiate(explosion_vertical);
         // horizontal explosion
@@ -185,6 +187,35 @@ public class Bomb_explosion : MonoBehaviour {
         RaycastHit hit;
         Vector3 position = new Vector3(posX, 1.2f, posZ);
         int layer_mask = LayerMask.GetMask("Player", "Map", "Bombs", "AI");
+        if(Physics.Raycast(position+new Vector3(0f,2f,0f),transform.up*(-1),out hit, 3f, layer_mask))
+        {
+            if (hit.collider.tag == "Player" || hit.collider.tag == "AI")
+            {
+                if (!hit_players.Contains(hit.collider.gameObject))
+                {
+                    if (!hit.collider.gameObject.GetComponent<Additional_power_ups>().invincible)
+                    {
+                        hit.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count--;
+                        if (hit.collider.gameObject.GetComponent<Additional_power_ups>().lifes_count <= 0 && hit.collider.name != creator.name)
+                        {
+                            int index = Index(creator.name);
+                            GameObject.Find("Stats").gameObject.GetComponent<Stats>().Kills[index]++;
+                        }
+                        hit.collider.gameObject.GetComponent<Additional_power_ups>().invincible = true;
+                        hit.collider.gameObject.GetComponent<Additional_power_ups>().Hit();
+                    }
+                    hit_players.Add(hit.collider.gameObject);
+                }
+            }
+            else if (hit.collider.tag == "Bombs")
+            {
+                if (!hit.collider.gameObject.GetComponent<Bomb_explosion>().exploding)
+                {
+                    hit.collider.gameObject.GetComponent<Bomb_explosion>().StopCoroutine(hit.collider.gameObject.GetComponent<Bomb_explosion>().Explosive);
+                    hit.collider.gameObject.GetComponent<Bomb_explosion>().Explode("Yes");
+                }
+            }
+        }
         for (int i=0;i<8;i++)
         {
             if (Physics.Raycast(position, Quaternion.Euler(0, i * 45, 0) * transform.forward, out hit, 0.6f, layer_mask))

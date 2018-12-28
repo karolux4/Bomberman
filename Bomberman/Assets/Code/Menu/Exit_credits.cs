@@ -7,7 +7,7 @@ public class Exit_credits : MonoBehaviour {
     public GameObject Main_Menu;
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Escape))
+		if(Input.GetButton("Cancel"))
         {
             Credits.SetActive(false);
             Main_Menu.SetActive(true);

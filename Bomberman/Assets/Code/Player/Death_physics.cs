@@ -26,6 +26,7 @@ public class Death_physics : MonoBehaviour {
     {
         if ((gameObject.tag == "Player" && gameObject.GetComponent<Additional_power_ups>().lifes_count <= 0) && (!Death_Menu.activeInHierarchy)&&UI.GetComponent<Game_Load>().ActiveAICount!=0)
         {
+            this.gameObject.GetComponent<Movement_physics>().end = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             UI.SetActive(false);
@@ -56,10 +57,13 @@ public class Death_physics : MonoBehaviour {
             this.gameObject.SetActive(false);
         }
     }
+    private bool started = false;
     private void Multiplayer()
     {
-        if(gameObject.tag=="Player"&& UI.GetComponent<Multiplayer_Game_Load>().ActivePlayers_Count==1&&UI.GetComponent<Multiplayer_Game_Load>().ActiveAI_Count==0)
+        if(gameObject.tag=="Player"&& UI.GetComponent<Multiplayer_Game_Load>().ActivePlayers_Count==1&&UI.GetComponent<Multiplayer_Game_Load>().ActiveAI_Count==0&&!started)
         {
+            this.gameObject.GetComponent<Movement_physics>().end = true;
+            started = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Win_Menu.transform.Find("Canvas_P" + this.gameObject.name[this.gameObject.name.Length - 1]).gameObject.SetActive(true);
@@ -90,6 +94,7 @@ public class Death_physics : MonoBehaviour {
                         GameObject.Find("Stats").GetComponent<Stats>().Wins[index]++;
                     }
                 }
+                this.gameObject.GetComponent<Movement_physics>().end = true;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 Death_Menu.transform.Find("Canvas_P" + this.gameObject.name[this.gameObject.name.Length - 1]).gameObject.transform.Find("Restart_Button").gameObject.SetActive(true);
