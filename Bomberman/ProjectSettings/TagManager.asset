@@ -15,6 +15,9 @@ TagManager:
   - Bomb_kick_power_up
   - AI
   - Bombs
+  - Sensitivity
+  - Stats
+  - Game_End_Box
   layers:
   - Default
   - TransparentFX
@@ -32,7 +35,7 @@ TagManager:
   - AI
   - P1_UI
   - P2_UI
-  - 
+  - Power_ups
   - 
   - 
   - 

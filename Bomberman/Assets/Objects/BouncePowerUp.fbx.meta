@@ -14,12 +14,18 @@ ModelImporter:
     400006: Rotation
     400008: Rotation_end
     2100000: No Name
+    2100002: Material
     4300000: Circle
     7400000: Armature|Rotation
     7400002: Armature|Untitled
     9500000: //RootNode
     13700000: Circle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 0a13c20a808698447a3a615637de79a3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -98,7 +104,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.0025
+    previousCalculatedGlobalScale: 0.005
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

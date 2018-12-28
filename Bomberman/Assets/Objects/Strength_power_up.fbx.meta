@@ -22,6 +22,7 @@ ModelImporter:
     400014: Sphere_end
     400016: //RootNode
     2100000: No Name
+    2100002: Material
     4300000: Circle
     7400000: Armature.002|1312312
     7400002: Armature.002|Action
@@ -37,7 +38,12 @@ ModelImporter:
     7400022: Armature.002|SphereAction
     9500000: //RootNode
     13700000: Circle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 66be4fdf365c44a4ea88d4b6f8089cb2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
